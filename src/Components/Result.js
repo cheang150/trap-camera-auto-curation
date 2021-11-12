@@ -10,6 +10,8 @@ import close from "../img/close.svg";
 import download from "../img/download.svg";
 import { DotLoader } from "react-spinners";
 import Modal from "react-modal";
+import { saveAs } from "file-saver";
+import JSZipUtils from "jszip-utils";
 
 function Result(props) {
   const [expanded, setExpanded] = useState(false);
@@ -28,6 +30,26 @@ function Result(props) {
   const handleExpand = (photo) => {
     console.log("expand");
     setExpanded(photo);
+  };
+
+  const handleDownload = (photos) => {
+    const zip = require("jszip")();
+    let count = 0;
+    photos.forEach((photo, index) => {
+      const fileName = photo
+        .replace(/[\/]/gi, "")
+        .replace("trap-camera-auto-curationstaticmedia", "");
+
+      JSZipUtils.getBinaryContent(photo, function (err, data) {
+        zip.file(fileName, data, { binary: true });
+        count++;
+        if (count === photos.length) {
+          zip.generateAsync({ type: "blob" }).then(function (content) {
+            saveAs(content, "auto-curation-photos.zip");
+          });
+        }
+      });
+    });
   };
 
   return (
@@ -116,9 +138,12 @@ function Result(props) {
           ))}
         </div>
         <div className="download">
-          <a href="test" download className="primaryButton">
+          <button
+            className="primaryButton"
+            onClick={() => handleDownload(props.shortlisted)}
+          >
             Download
-          </a>
+          </button>
         </div>
       </div>
 
@@ -129,7 +154,12 @@ function Result(props) {
             <div className="photo" key={index}>
               <img src={p} alt="shortlisted" className="photoSrc" />
               <div className="photoTools">
-                <img src={expand} alt="expand icon" className="tools" />
+                <img
+                  src={expand}
+                  alt="expand icon"
+                  className="tools"
+                  onClick={() => handleExpand(p)}
+                />
                 <img src={edit} alt="edit icon" className="tools" />
                 <img
                   src={tick}
@@ -142,9 +172,12 @@ function Result(props) {
           ))}
         </div>
         <div className="download">
-          <a href="test" download className="primaryButton">
+          <button
+            className="primaryButton"
+            onClick={() => handleDownload(props.potential)}
+          >
             Download
-          </a>
+          </button>
         </div>
       </div>
     </div>
