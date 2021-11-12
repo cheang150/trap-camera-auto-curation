@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/trap-camera-auto-curation/static/css/main.be120a6f.chunk.css",
-    "main.js": "/trap-camera-auto-curation/static/js/main.3f007a8d.chunk.js",
-    "main.js.map": "/trap-camera-auto-curation/static/js/main.3f007a8d.chunk.js.map",
+    "main.js": "/trap-camera-auto-curation/static/js/main.2a3838e2.chunk.js",
+    "main.js.map": "/trap-camera-auto-curation/static/js/main.2a3838e2.chunk.js.map",
     "runtime-main.js": "/trap-camera-auto-curation/static/js/runtime-main.30b60497.js",
     "runtime-main.js.map": "/trap-camera-auto-curation/static/js/runtime-main.30b60497.js.map",
-    "static/js/2.a418720e.chunk.js": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js",
-    "static/js/2.a418720e.chunk.js.map": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js.map",
+    "static/js/2.6253a687.chunk.js": "/trap-camera-auto-curation/static/js/2.6253a687.chunk.js",
+    "static/js/2.6253a687.chunk.js.map": "/trap-camera-auto-curation/static/js/2.6253a687.chunk.js.map",
     "index.html": "/trap-camera-auto-curation/index.html",
     "static/css/main.be120a6f.chunk.css.map": "/trap-camera-auto-curation/static/css/main.be120a6f.chunk.css.map",
-    "static/js/2.a418720e.chunk.js.LICENSE.txt": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js.LICENSE.txt",
+    "static/js/2.6253a687.chunk.js.LICENSE.txt": "/trap-camera-auto-curation/static/js/2.6253a687.chunk.js.LICENSE.txt",
     "static/media/Filter.css": "/trap-camera-auto-curation/static/media/arrowDown.ccbdc831.svg",
     "static/media/Upload.css": "/trap-camera-auto-curation/static/media/borderImage.d6b71d97.svg",
     "static/media/close.45c6ea8a.svg": "/trap-camera-auto-curation/static/media/close.45c6ea8a.svg",
@@ -28,8 +28,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.30b60497.js",
-    "static/js/2.a418720e.chunk.js",
+    "static/js/2.6253a687.chunk.js",
     "static/css/main.be120a6f.chunk.css",
-    "static/js/main.3f007a8d.chunk.js"
+    "static/js/main.2a3838e2.chunk.js"
   ]
 }
