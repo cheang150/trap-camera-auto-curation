@@ -1,0 +1,18 @@
+
+<svg width="1240px" height="507px" viewBox="0 0 1240 507" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <rect id="path-xkedkd8mlo-1" x="0" y="0" width="1240" height="507" rx="50"></rect>
+        <mask id="mask-xkedkd8mlo-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="1240" height="507" fill="white">
+            <use xlink:href="#path-xkedkd8mlo-1"></use>
+        </mask>
+    </defs>
+    <g id="Prototype" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="13" stroke-opacity="0.5">
+        <g id="Dashboard" transform="translate(-100.000000, -927.000000)" stroke="#4A4A4A" stroke-width="4">
+            <g id="Upload" transform="translate(100.000000, 771.000000)">
+                <g id="Drop-upload" transform="translate(0.000000, 156.000000)">
+                    <use id="Rectangle" mask="url(#mask-xkedkd8mlo-2)" xlink:href="#path-xkedkd8mlo-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

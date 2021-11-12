@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/trap-camera-auto-curation/static/css/main.be120a6f.chunk.css",
+    "main.js": "/trap-camera-auto-curation/static/js/main.3f007a8d.chunk.js",
+    "main.js.map": "/trap-camera-auto-curation/static/js/main.3f007a8d.chunk.js.map",
+    "runtime-main.js": "/trap-camera-auto-curation/static/js/runtime-main.30b60497.js",
+    "runtime-main.js.map": "/trap-camera-auto-curation/static/js/runtime-main.30b60497.js.map",
+    "static/js/2.a418720e.chunk.js": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js",
+    "static/js/2.a418720e.chunk.js.map": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js.map",
+    "index.html": "/trap-camera-auto-curation/index.html",
+    "static/css/main.be120a6f.chunk.css.map": "/trap-camera-auto-curation/static/css/main.be120a6f.chunk.css.map",
+    "static/js/2.a418720e.chunk.js.LICENSE.txt": "/trap-camera-auto-curation/static/js/2.a418720e.chunk.js.LICENSE.txt",
+    "static/media/Filter.css": "/trap-camera-auto-curation/static/media/arrowDown.ccbdc831.svg",
+    "static/media/Upload.css": "/trap-camera-auto-curation/static/media/borderImage.d6b71d97.svg",
+    "static/media/close.45c6ea8a.svg": "/trap-camera-auto-curation/static/media/close.45c6ea8a.svg",
+    "static/media/download.8057372f.svg": "/trap-camera-auto-curation/static/media/download.8057372f.svg",
+    "static/media/edit.cf44daae.svg": "/trap-camera-auto-curation/static/media/edit.cf44daae.svg",
+    "static/media/expand.d1190c40.svg": "/trap-camera-auto-curation/static/media/expand.d1190c40.svg",
+    "static/media/house.82b00f19.jpg": "/trap-camera-auto-curation/static/media/house.82b00f19.jpg",
+    "static/media/nature.9cf43db0.svg": "/trap-camera-auto-curation/static/media/nature.9cf43db0.svg",
+    "static/media/reject.5a103cf8.svg": "/trap-camera-auto-curation/static/media/reject.5a103cf8.svg",
+    "static/media/search.2c535048.svg": "/trap-camera-auto-curation/static/media/search.2c535048.svg",
+    "static/media/settings.0027e295.svg": "/trap-camera-auto-curation/static/media/settings.0027e295.svg",
+    "static/media/sunset.a4ff3009.jpeg": "/trap-camera-auto-curation/static/media/sunset.a4ff3009.jpeg",
+    "static/media/tick-gray.5d3f1dda.svg": "/trap-camera-auto-curation/static/media/tick-gray.5d3f1dda.svg",
+    "static/media/tree.2da1e271.jpeg": "/trap-camera-auto-curation/static/media/tree.2da1e271.jpeg",
+    "static/media/upload.7039bdaa.svg": "/trap-camera-auto-curation/static/media/upload.7039bdaa.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.30b60497.js",
+    "static/js/2.a418720e.chunk.js",
+    "static/css/main.be120a6f.chunk.css",
+    "static/js/main.3f007a8d.chunk.js"
+  ]
+}
