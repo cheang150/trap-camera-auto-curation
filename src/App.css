@@ -1,38 +1,77 @@
-.App {
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-family: "Avenir Next", "Avenir Next LT Pro", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #4a4a4a;
+  font-size: 18px;
+}
+
+body {
+  margin: 3.5% 5.25%;
+  zoom: 0.8;
+  -webkit-zoom: 0.8;
+  -moz-transform: scale(0.8, 0.8);
+  -moz-transform-origin: left center;
+}
+
+h2 {
+  font-size: 2.11rem;
+}
+
+.primaryButton {
+  display: inline-block;
+  cursor: pointer;
+  height: 56px;
+  width: 216px;
+  border: 2px solid #ed5940;
+  border-radius: 18px;
+  background-color: #ed5940;
+  color: #fff;
+  font-size: 1.33rem;
+  font-weight: 500;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
   text-align: center;
+  line-height: 56px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.primaryButton:hover {
+  background-color: rgba(0, 0, 0, 0);
+  color: #ed5940;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.secondaryButton {
+  display: inline-block;
+  cursor: pointer;
+  height: 56px;
+  width: 216px;
+  border: 2px solid rgba(74, 74, 74, 0.5);
+  border-radius: 18px;
+  background-color: #fff;
+  color: #4a4a4a;
+  font-size: 1.33rem;
+  font-weight: 500;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  text-align: center;
+  line-height: 56px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.secondaryButton:hover {
+  background-color: rgba(74, 74, 74, 0.1);
+}
+
+.loader {
+  position: absolute;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  z-index: 3;
 }
