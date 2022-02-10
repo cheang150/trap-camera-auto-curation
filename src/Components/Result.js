@@ -27,6 +27,10 @@ function Result(props) {
     props.setShortlisted((prev) => [...prev, props.potential[idx]]);
   };
 
+  const handleEdit = (photo) => {
+    console.log("edit");
+  };
+
   const handleExpand = (photo) => {
     console.log("expand");
     setExpanded(photo);
@@ -126,7 +130,12 @@ function Result(props) {
                   className="tools"
                   onClick={() => handleExpand(p)}
                 />
-                <img src={edit} alt="edit icon" className="tools" />
+                <img
+                  src={edit}
+                  alt="edit icon"
+                  className="tools"
+                  onClick={() => handleEdit(p)}
+                />
                 <img
                   src={reject}
                   alt="reject icon"

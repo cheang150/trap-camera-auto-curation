@@ -6,9 +6,9 @@ import settingsIcon from "../img/settings.svg";
 Modal.setAppElement("#root");
 function ParamsModal(props) {
   const [modalOpen, setModelOpen] = useState(false);
-  const [resolutionModel, setResolutionModel] = useState("ESPCN");
-  const [histogramEq, setHistogramEq] = useState(true);
-  const [autoEnhance, setAutoEnhance] = useState(true);
+  const [resolutionModel, setResolutionModel] = useState(1);
+  const [histogramEq, setHistogramEq] = useState(1);
+  const [autoEnhance, setAutoEnhance] = useState(1);
 
   const handleOpen = () => {
     setModelOpen(true);
@@ -28,15 +28,21 @@ function ParamsModal(props) {
   };
 
   const handleResolutionModel = (e) => {
-    setResolutionModel(e.target.innerHTML);
+    if (e.target.innerHTML === "ESPCN") {
+      setResolutionModel(1);
+    } else if (e.target.innerHTML === "FSRCNN") {
+      setResolutionModel(2);
+    } else if (e.target.innerHTML === "LapSRN") {
+      setResolutionModel(3);
+    }
   };
 
   const handleHistogramEq = (e) => {
-    e.target.innerHTML === "On" ? setHistogramEq(true) : setHistogramEq(false);
+    e.target.innerHTML === "On" ? setHistogramEq(1) : setHistogramEq(0);
   };
 
   const handleAutoEnhance = (e) => {
-    e.target.innerHTML === "On" ? setAutoEnhance(true) : setAutoEnhance(false);
+    e.target.innerHTML === "On" ? setAutoEnhance(1) : setAutoEnhance(0);
   };
 
   return (
@@ -74,19 +80,19 @@ function ParamsModal(props) {
               <p>Lorem Ipsum is simply dummy text of the printing.</p>
               <div className="buttonGrp">
                 <button
-                  id={resolutionModel === "ESPCN" ? "resModelButton" : null}
+                  id={resolutionModel === 1 ? "resModelButton" : null}
                   onClick={handleResolutionModel}
                 >
                   ESPCN
                 </button>
                 <button
-                  id={resolutionModel === "FSRCNN" ? "resModelButton" : null}
+                  id={resolutionModel === 2 ? "resModelButton" : null}
                   onClick={handleResolutionModel}
                 >
                   FSRCNN
                 </button>
                 <button
-                  id={resolutionModel === "LapSRN" ? "resModelButton" : null}
+                  id={resolutionModel === 3 ? "resModelButton" : null}
                   onClick={handleResolutionModel}
                 >
                   LapSRN
@@ -101,13 +107,13 @@ function ParamsModal(props) {
               <p>Adjust image's contrast based on tonal distribution.</p>
               <div className="buttonGrp">
                 <button
-                  id={histogramEq === true ? "histEqButton" : null}
+                  id={histogramEq === 1 ? "histEqButton" : null}
                   onClick={handleHistogramEq}
                 >
                   On
                 </button>
                 <button
-                  id={histogramEq === false ? "histEqButton" : null}
+                  id={histogramEq === 0 ? "histEqButton" : null}
                   onClick={handleHistogramEq}
                 >
                   Off
@@ -120,13 +126,13 @@ function ParamsModal(props) {
               <p>Sharpen image using convolution kernal matrix.</p>
               <div className="buttonGrp">
                 <button
-                  id={autoEnhance === true ? "enhanceButton" : null}
+                  id={autoEnhance === 1 ? "enhanceButton" : null}
                   onClick={handleAutoEnhance}
                 >
                   On
                 </button>
                 <button
-                  id={autoEnhance === false ? "enhanceButton" : null}
+                  id={autoEnhance === 0 ? "enhanceButton" : null}
                   onClick={handleAutoEnhance}
                 >
                   Off

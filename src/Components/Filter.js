@@ -1,18 +1,20 @@
-import React from 'react'
-import './Filter.css'
+import React from "react";
+import "./Filter.css";
 
-function Filter() {
-    return (
-        <div className="filter">
-            <span>Filter by</span>
-            <select className="filterList">
-                <option value="all files">All Files</option>
-                <option value="avi">AVI</option>
-                <option value="mov">MOV</option>
-                <option value="mp4">MP4</option>
-            </select>
-        </div>
-    )
+function Filter(props) {
+  return (
+    <div className="filter">
+      <span>Filter by</span>
+      <select className="filterList" onChange={props.handleFilter}>
+        <option value="All Files">All Files</option>
+        {props.filterList.map((item) => (
+          <option value={item} key={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
 }
 
-export default Filter
+export default Filter;

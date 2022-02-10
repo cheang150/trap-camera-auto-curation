@@ -15,6 +15,9 @@ function Upload(props) {
   const [types, setTypes] = useState([]);
   const [endTime, setEndTime] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filterList, setFilterList] = useState([]);
+  const [filterBy, setFilterBy] = useState("All Files");
+  const [searchBy, setSearchBy] = useState("");
 
   const handleDrag = (e) => {
     e.preventDefault();
@@ -25,6 +28,10 @@ function Upload(props) {
     e.preventDefault();
     e.stopPropagation();
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const type = String(e.dataTransfer.files[0].type).split("/")[1];
+      if (!filterList.includes(type)) {
+        setFilterList((prev) => [...prev, type]);
+      }
       setLoading((prev) => !prev);
       setNames((prev) => [...prev, e.dataTransfer.files[0].name]);
       setSizes((prev) => [...prev, e.dataTransfer.files[0].size]);
@@ -53,6 +60,10 @@ function Upload(props) {
   const handleUpload = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    const type = String(e.target.files[0].type).split("/")[1];
+    if (!filterList.includes(type)) {
+      setFilterList((prev) => [...prev, type]);
+    }
     setLoading((prev) => !prev);
     setNames((prev) => [...prev, e.target.files[0].name]);
     setSizes((prev) => [...prev, e.target.files[0].size]);
@@ -73,13 +84,21 @@ function Upload(props) {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  const handleFilter = (e) => {
+    setFilterBy(e.target.value);
+  };
+
+  const handleSearch = (e) => {
+    setSearchBy(e.target.value);
+  };
+
   return (
     <div id="upload">
       <Title sectionTitle="Upload Files" line={true} />
       <div className="uploadTools">
-        <Filter />
+        <Filter filterList={filterList} handleFilter={handleFilter} />
         <div className="rightTools">
-          <Search />
+          <Search handleSearch={handleSearch} />
           <input
             type="file"
             ref={uploadRef}
@@ -119,6 +138,8 @@ function Upload(props) {
             handleDrag={handleDrag}
             handleDrop={handleDrop}
             loading={loading}
+            filterBy={filterBy}
+            searchBy={searchBy}
           />
           <ParamsModal
             videos={videos}
