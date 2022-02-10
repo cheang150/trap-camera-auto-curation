@@ -73,28 +73,15 @@ function TableBox(props) {
       </div>
 
       {props.videos.map((video, index) => {
-        console.log(props.searchBy);
-        console.log(props.filterBy);
-
-        if (String(props.types[index]).split("/")[1] === props.filterBy) {
+        if (
+          (String(props.types[index]).split("/")[1] === props.filterBy ||
+            props.filterBy === "All Files") &&
+          String(props.names[index]).includes(props.searchBy)
+        ) {
           return renderContent(video, index);
         } else if (props.filterBy === "All Files" && props.searchBy === "") {
           return renderContent(video, index);
-        } else if (String(props.names[index]).includes(props.searchBy)) {
-          // console.log(props.names[index]);
-          return renderContent(video, index);
         }
-        // } else if (props.filterBy === "All Files") {
-        //   // console.log("rendering all");
-        //   return renderContent(video, index);
-        // }
-        // else if (String(props.types[index]).split("/")[1] === props.filterBy) {
-        //   console.log(props.types[index]);
-        //   return renderContent(video, index);
-        // }
-        // else if (props.filterBy === "All Files") {
-        //   return tableContent(video, index);
-        // }
       })}
     </div>
   );
