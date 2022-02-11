@@ -104,7 +104,6 @@ function Upload(props) {
             ref={uploadRef}
             style={{ display: "none" }}
             onChange={handleUpload}
-            multiple
           />
           <button
             type="submit"
@@ -118,11 +117,11 @@ function Upload(props) {
 
       {videos.length === 0 ? (
         <UploadBox
-          setNames={setNames}
-          setTypes={setTypes}
-          setSizes={setSizes}
-          setEndTime={setEndTime}
-          setVideos={setVideos}
+          // setNames={setNames}
+          // setTypes={setTypes}
+          // setSizes={setSizes}
+          // setEndTime={setEndTime}
+          // setVideos={setVideos}
           uploadRef={uploadRef}
           handleDrag={handleDrag}
           handleDrop={handleDrop}
@@ -140,13 +139,15 @@ function Upload(props) {
             loading={loading}
             filterBy={filterBy}
             searchBy={searchBy}
+            setSelections={props.setSelections}
           />
           <ParamsModal
-            videos={videos}
+            selections={props.selections}
             setShortlisted={props.setShortlisted}
             setPotential={props.setPotential}
             setProcessing={props.setProcessing}
             loading={loading}
+            setProcessedVideos={props.setProcessedVideos}
           />
         </React.Fragment>
       )}

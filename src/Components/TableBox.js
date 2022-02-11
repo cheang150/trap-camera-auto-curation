@@ -15,11 +15,25 @@ function TableBox(props) {
     };
   });
 
+  const handleSelection = (e, video, name) => {
+    if (e.target.checked) {
+      props.setSelections((prev) => [...prev, { name: name, url: video }]);
+    } else {
+      props.setSelections((prev) =>
+        prev.filter((selection) => selection.name !== name)
+      );
+    }
+  };
+
   const renderContent = (video, index) => {
     return (
       <div className="tableRow" key={index}>
         <div className="tableLeft">
-          <input type="checkbox" className="checkBox" />
+          <input
+            type="checkbox"
+            className="checkBox"
+            onClick={(e) => handleSelection(e, video, props.names[index])}
+          />
           <video>
             <source src={video} type={props.types[index]}></source>
           </video>
@@ -61,7 +75,11 @@ function TableBox(props) {
 
       <div className="header">
         <div className="tableLeft">
-          <input type="checkbox" className="checkBox" />
+          <input
+            type="checkbox"
+            className="checkBox"
+            style={{ visibility: "hidden" }}
+          />
           <span className="fileName">Name</span>
         </div>
         <div>

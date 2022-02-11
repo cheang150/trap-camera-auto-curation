@@ -18,9 +18,13 @@ function ParamsModal(props) {
   const handleSave = () => {
     setModelOpen(false);
     props.setProcessing(true);
-    alert(
-      `Processing ${props.videos.length} videos with ${resolutionModel} ${histogramEq} ${autoEnhance}`
-    );
+    for (let selection of props.selections) {
+      alert(
+        `Processing ${selection.name} ${selection.url} with ${resolutionModel} ${histogramEq} ${autoEnhance}`
+      );
+      props.setProcessedVideos((prev) => [...prev, selection.name]);
+    }
+    props.setProcessing(false);
   };
 
   const handleCancel = () => {

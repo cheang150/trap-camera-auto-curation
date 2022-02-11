@@ -11,6 +11,8 @@ function App() {
   const [processing, setProcessing] = useState(null);
   const [shortlisted, setShortlisted] = useState([tree, sunset, house]);
   const [potential, setPotential] = useState([tree, sunset, house]);
+  const [selections, setSelections] = useState([]);
+  const [processedVideos, setProcessedVideos] = useState([]);
 
   return (
     <div className="App">
@@ -19,6 +21,9 @@ function App() {
         setShortlisted={setShortlisted}
         setPotential={setPotential}
         setProcessing={setProcessing}
+        selections={selections}
+        setSelections={setSelections}
+        setProcessedVideos={setProcessedVideos}
       />
       {processing === null ? null : (
         <Result
@@ -27,6 +32,7 @@ function App() {
           potential={potential}
           setShortlisted={setShortlisted}
           setPotential={setPotential}
+          processedVideos={processedVideos}
         />
       )}
     </div>

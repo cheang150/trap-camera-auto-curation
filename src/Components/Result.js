@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./Title";
 import Filter from "./Filter";
 import "./Result.css";
@@ -58,15 +58,15 @@ function Result(props) {
 
   return (
     <div id="result">
-      {/* {props.processing ? (
+      {props.processing ? (
         <div className="loader">
           <DotLoader color="#40D3ED" size={100} loading={props.processing} />
         </div>
-      ) : null} */}
+      ) : null}
 
       <Title sectionTitle="Results" line={true} />
       <div className="resultFilter">
-        <Filter />
+        <Filter filterList={props.processedVideos} />
       </div>
 
       <div className="statistics">
