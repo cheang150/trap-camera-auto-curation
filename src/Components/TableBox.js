@@ -1,48 +1,64 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { BeatLoader } from "react-spinners";
 
 function TableBox(props) {
-  const dropRef = useRef(null);
-
-  useEffect(() => {
-    const div = dropRef.current;
-    div.addEventListener("dragover", props.handleDrag);
-    div.addEventListener("drop", props.handleDrop);
-
-    return () => {
-      div.removeEventListener("dragover", props.handleDrag);
-      div.removeEventListener("drop", props.handleDrop);
-    };
-  });
-
-  const handleSelection = (e, video, name) => {
+  const handleSelection = (e, video) => {
     if (e.target.checked) {
-      props.setSelections((prev) => [...prev, { name: name, url: video }]);
+      if (video.startTime === undefined) {
+        video.startTime = "00:00";
+      }
+      props.setSelections((prev) => [...prev, video]);
     } else {
       props.setSelections((prev) =>
-        prev.filter((selection) => selection.name !== name)
+        prev.filter((selection) => selection.name !== video.name)
       );
     }
   };
 
-  const renderContent = (video, index) => {
+  const handleStartTime = (e, video) => {
+    video.startTime = e.target.value;
+    for (var selection of props.selections) {
+      if (selection.name === video.name) {
+        props.setSelections((prev) => [
+          ...prev.filter((selection) => selection.name !== video.name),
+          video,
+        ]);
+        break;
+      }
+    }
+  };
+
+  const handleEndTime = (e, video) => {
+    video.endTime = e.target.value;
+    for (var selection of props.selections) {
+      if (selection.name === video.name) {
+        props.setSelections((prev) => [
+          ...prev.filter((selection) => selection.name !== video.name),
+          video,
+        ]);
+        break;
+      }
+    }
+  };
+
+  const renderContent = (video) => {
     return (
-      <div className="tableRow" key={index}>
+      <div className="tableRow" key={video.name}>
         <div className="tableLeft">
           <input
             type="checkbox"
             className="checkBox"
-            onClick={(e) => handleSelection(e, video, props.names[index])}
+            onClick={(e) => handleSelection(e, video)}
           />
           <video>
-            <source src={video} type={props.types[index]}></source>
+            <source src={video.url} type={video.type}></source>
           </video>
-          <span className="fileName">{props.names[index]}</span>
+          <span className="fileName">{video.name}</span>
         </div>
         <div>
-          <span className="fileType">{props.types[index]}</span>
+          <span className="fileType">{video.type}</span>
           <span className="fileSize">
-            {(props.sizes[index] / 1000000).toFixed(2)}MB
+            {(video.size / 1000000).toFixed(2)}MB
           </span>
           <span className="startTime">
             <input
@@ -50,14 +66,16 @@ function TableBox(props) {
               className="startValue"
               defaultValue="00:00"
               maxLength={5}
+              onChange={(e) => handleStartTime(e, video)}
             />
           </span>
           <span className="endTime">
             <input
               type="text"
               className="endValue"
-              defaultValue={props.endTime[index]}
+              defaultValue={video.endTime}
               maxLength={5}
+              onChange={(e) => handleEndTime(e, video)}
             />
           </span>
         </div>
@@ -66,7 +84,7 @@ function TableBox(props) {
   };
 
   return (
-    <div className="tableBox" ref={dropRef}>
+    <div className="tableBox">
       {props.loading ? (
         <div className="loader">
           <BeatLoader color="#40D3ED" size={24} loading={props.loading} />
@@ -90,15 +108,15 @@ function TableBox(props) {
         </div>
       </div>
 
-      {props.videos.map((video, index) => {
+      {props.videos.map((video) => {
         if (
-          (String(props.types[index]).split("/")[1] === props.filterBy ||
+          (String(video.type).split("/")[1] === props.filterBy ||
             props.filterBy === "All Files") &&
-          String(props.names[index]).includes(props.searchBy)
+          String(video.name).includes(props.searchBy)
         ) {
-          return renderContent(video, index);
+          return renderContent(video);
         } else if (props.filterBy === "All Files" && props.searchBy === "") {
-          return renderContent(video, index);
+          return renderContent(video);
         }
       })}
     </div>

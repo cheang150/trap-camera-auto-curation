@@ -8,6 +8,10 @@
   margin-top: 80px;
 }
 
+#processButton > button:disabled {
+  cursor: not-allowed;
+}
+
 .paramsModal {
   position: absolute;
   top: 15%;

@@ -19,10 +19,18 @@ function ParamsModal(props) {
     setModelOpen(false);
     props.setProcessing(true);
     for (let selection of props.selections) {
-      alert(
-        `Processing ${selection.name} ${selection.url} with ${resolutionModel} ${histogramEq} ${autoEnhance}`
+      alert(`Processing ${selection.name}, check console for more`);
+      console.log(
+        `Parameters: ${resolutionModel} ${histogramEq} ${autoEnhance}`
       );
+      console.log("Processing", selection);
       props.setProcessedVideos((prev) => [...prev, selection.name]);
+      props.setVideos((prev) =>
+        prev.filter((video) => video.name !== selection.name)
+      );
+      props.setSelections((prev) =>
+        prev.filter((video) => video.name !== selection.name)
+      );
     }
     props.setProcessing(false);
   };
@@ -54,7 +62,7 @@ function ParamsModal(props) {
       <div id="processButton">
         <button
           className="primaryButton"
-          disabled={props.loading}
+          disabled={props.loading || !props.selections.length}
           onClick={handleOpen}
         >
           Process

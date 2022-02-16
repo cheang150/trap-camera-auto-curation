@@ -10,52 +10,10 @@ import UploadBox from "./UploadBox";
 function Upload(props) {
   const uploadRef = useRef(null);
   const [videos, setVideos] = useState([]);
-  const [names, setNames] = useState([]);
-  const [sizes, setSizes] = useState([]);
-  const [types, setTypes] = useState([]);
-  const [endTime, setEndTime] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterList, setFilterList] = useState([]);
   const [filterBy, setFilterBy] = useState("All Files");
   const [searchBy, setSearchBy] = useState("");
-
-  const handleDrag = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const type = String(e.dataTransfer.files[0].type).split("/")[1];
-      if (!filterList.includes(type)) {
-        setFilterList((prev) => [...prev, type]);
-      }
-      setLoading((prev) => !prev);
-      setNames((prev) => [...prev, e.dataTransfer.files[0].name]);
-      setSizes((prev) => [...prev, e.dataTransfer.files[0].size]);
-      setTypes((prev) => [...prev, e.dataTransfer.files[0].type]);
-      setVideos((prev) => [
-        ...prev,
-        URL.createObjectURL(e.dataTransfer.files[0]),
-      ]);
-      var reader = new FileReader();
-      reader.onload = function () {
-        var vid = new Audio(reader.result);
-        vid.onloadedmetadata = function () {
-          const convertedEndTime =
-            ("0" + (Math.floor(parseInt(vid.duration) / 60) % 60)).slice(-2) +
-            ":" +
-            ("0" + (parseInt(vid.duration) % 60)).slice(-2);
-          setEndTime((prev) => [...prev, convertedEndTime]);
-          setLoading((prev) => !prev);
-        };
-      };
-      reader.readAsDataURL(e.dataTransfer.files[0]);
-      e.dataTransfer.clearData();
-    }
-  };
 
   const handleUpload = (e) => {
     e.preventDefault();
@@ -65,10 +23,12 @@ function Upload(props) {
       setFilterList((prev) => [...prev, type]);
     }
     setLoading((prev) => !prev);
-    setNames((prev) => [...prev, e.target.files[0].name]);
-    setSizes((prev) => [...prev, e.target.files[0].size]);
-    setTypes((prev) => [...prev, e.target.files[0].type]);
-    setVideos((prev) => [...prev, URL.createObjectURL(e.target.files[0])]);
+    const videoDatas = {
+      url: URL.createObjectURL(e.target.files[0]),
+      name: e.target.files[0].name,
+      size: e.target.files[0].size,
+      type: e.target.files[0].type,
+    };
     var reader = new FileReader();
     reader.onload = function () {
       var vid = new Audio(reader.result);
@@ -77,7 +37,8 @@ function Upload(props) {
           ("0" + (Math.floor(parseInt(vid.duration) / 60) % 60)).slice(-2) +
           ":" +
           ("0" + (parseInt(vid.duration) % 60)).slice(-2);
-        setEndTime((prev) => [...prev, convertedEndTime]);
+        videoDatas.endTime = convertedEndTime;
+        setVideos((prev) => [...prev, videoDatas]);
         setLoading((prev) => !prev);
       };
     };
@@ -116,38 +77,26 @@ function Upload(props) {
       </div>
 
       {videos.length === 0 ? (
-        <UploadBox
-          // setNames={setNames}
-          // setTypes={setTypes}
-          // setSizes={setSizes}
-          // setEndTime={setEndTime}
-          // setVideos={setVideos}
-          uploadRef={uploadRef}
-          handleDrag={handleDrag}
-          handleDrop={handleDrop}
-        />
+        <UploadBox uploadRef={uploadRef} />
       ) : (
         <React.Fragment>
           <TableBox
             videos={videos}
-            names={names}
-            sizes={sizes}
-            types={types}
-            endTime={endTime}
-            handleDrag={handleDrag}
-            handleDrop={handleDrop}
             loading={loading}
             filterBy={filterBy}
             searchBy={searchBy}
             setSelections={props.setSelections}
+            selections={props.selections}
           />
           <ParamsModal
             selections={props.selections}
+            setSelections={props.setSelections}
             setShortlisted={props.setShortlisted}
             setPotential={props.setPotential}
             setProcessing={props.setProcessing}
             loading={loading}
             setProcessedVideos={props.setProcessedVideos}
+            setVideos={setVideos}
           />
         </React.Fragment>
       )}
