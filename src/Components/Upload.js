@@ -24,7 +24,7 @@ function Upload(props) {
     }
     setLoading((prev) => !prev);
     const videoDatas = {
-      url: URL.createObjectURL(e.target.files[0]),
+      object: e.target.files[0],
       name: e.target.files[0].name,
       size: e.target.files[0].size,
       type: e.target.files[0].type,

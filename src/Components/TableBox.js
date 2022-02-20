@@ -42,6 +42,7 @@ function TableBox(props) {
   };
 
   const renderContent = (video) => {
+    const url = URL.createObjectURL(video.object);
     return (
       <div className="tableRow" key={video.name}>
         <div className="tableLeft">
@@ -51,7 +52,7 @@ function TableBox(props) {
             onClick={(e) => handleSelection(e, video)}
           />
           <video>
-            <source src={video.url} type={video.type}></source>
+            <source src={url} type={video.type}></source>
           </video>
           <span className="fileName">{video.name}</span>
         </div>

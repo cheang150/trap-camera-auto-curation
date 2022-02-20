@@ -27,7 +27,6 @@ function Result(props) {
   });
   const [completedCrop, setCompletedCrop] = useState(null);
   const imgRef = useRef(null);
-  const [cropResult, setCropResult] = useState(null);
 
   const handleReject = (idx) => {
     console.log(idx);
@@ -116,10 +115,7 @@ function Result(props) {
     const zip = require("jszip")();
     let count = 0;
     photos.forEach((photo, index) => {
-      const fileName = photo
-        .replace(/[\/]/gi, "")
-        .replace("trap-camera-auto-curationstaticmedia", "");
-
+      const fileName = `${index}.jpeg`;
       JSZipUtils.getBinaryContent(photo, function (err, data) {
         zip.file(fileName, data, { binary: true });
         count++;
