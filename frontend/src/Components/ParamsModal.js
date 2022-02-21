@@ -18,12 +18,26 @@ function ParamsModal(props) {
   const handleSave = () => {
     setModelOpen(false);
     props.setProcessing(true);
+
     for (let selection of props.selections) {
       alert(`Processing ${selection.name}, check console for more`);
-      console.log(
-        `Parameters: ${resolutionModel} ${histogramEq} ${autoEnhance}`
-      );
-      console.log("Processing", selection);
+
+      const file = new FormData();
+      file.append("object", selection.object);
+      file.append("name", selection.name);
+      file.append("startTime", selection.startTime);
+      file.append("endTime", selection.endTime);
+      file.append("resolutionModel", resolutionModel);
+      file.append("histogramEq", histogramEq);
+      file.append("autoEnhance", autoEnhance);
+
+      fetch(`http://localhost:9000/python?`, {
+        method: "POST",
+        body: file,
+      })
+        .then((res) => res.text())
+        .then((res) => console.log(res));
+
       props.setProcessedVideos((prev) => [...prev, selection.name]);
       props.setVideos((prev) =>
         prev.filter((video) => video.name !== selection.name)
