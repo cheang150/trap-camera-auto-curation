@@ -10,8 +10,6 @@ router.post("/", function (req, res, next) {
     }
     videoData.path = `${__dirname}/../public/${videoFile.name}`;
     res.send(videoData);
-    // res.json({ path: `${__dirname}/../public/${videoFile.name}` });
-    // console.log(videoData);
   });
 
   //   var spawn = require("child_process").spawn;

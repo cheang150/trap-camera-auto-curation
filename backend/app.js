@@ -6,15 +6,9 @@ var logger = require("morgan");
 var cors = require("cors");
 var fileUpload = require("express-fileupload");
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 var pythonRouter = require("./routes/python");
 
 var app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
 
 app.use(cors());
 app.use(fileUpload());
@@ -24,8 +18,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/python", pythonRouter);
 
 // catch 404 and forward to error handler
