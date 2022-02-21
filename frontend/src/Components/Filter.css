@@ -1,0 +1,25 @@
+.filter {
+  display: inline-block;
+}
+
+.filter * {
+  font-size: 1.33rem;
+  font-weight: 500;
+}
+
+.filterList {
+  cursor: pointer;
+  margin-left: 20px;
+  color: #40d3ed;
+  width: 116px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background-image: url("../img/arrowDown.svg");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 3px) center;
+}
+
+select:focus {
+  outline: none;
+}

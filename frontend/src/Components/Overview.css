@@ -1,0 +1,39 @@
+#overview .box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 40px;
+  background-color: #fbf1f4;
+  height: 480px;
+  border-radius: 50px;
+  padding-left: 8%;
+}
+
+h1 {
+  font-size: 3.44rem;
+}
+
+#description {
+  margin-top: 20px;
+  font-size: 1.33rem;
+  width: 50%;
+  font-weight: 300;
+}
+
+#overview a {
+  margin-top: 40px;
+}
+
+#overview .box *:not(img) {
+  position: relative;
+  /* z-index: 2; */
+}
+
+#overview img {
+  position: absolute;
+  /* z-index: 1; */
+  right: -72px;
+  height: 90%;
+}
