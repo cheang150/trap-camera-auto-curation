@@ -6,13 +6,13 @@ import numpy as np
 def upscale_image(img_checked, counter):
     sr = cv2.dnn_superres.DnnSuperResImpl_create()
     if counter == 1:
-        model = "../../backEnd/Background/SR_Models/ESPCN_x2.pb"
+        model = "script/Background/SR_Models/ESPCN_x2.pb"
         set_model = "espcn"
     elif counter == 2:
-        model = "../../backEnd/Background/SR_Models/FSRCNN_x2.pb"
+        model = "script/Background/SR_Models/FSRCNN_x2.pb"
         set_model = "fsrcnn"
     elif counter == 3:
-        model = "../../backEnd/Background/SR_Models/LapSRN_x2.pb"
+        model = "script/Background/SR_Models/LapSRN_x2.pb"
         set_model = "lapsrn"
     sr.readModel(model)
     sr.setModel(set_model, 2)

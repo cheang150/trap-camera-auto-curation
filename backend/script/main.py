@@ -18,7 +18,7 @@ from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
 
 print(os.getcwd())
 DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.85
-MEGA_MODEL_FILE_PATH = r"../../backEnd/Mega/detection/md_v4.1.0.pb"
+MEGA_MODEL_FILE_PATH = r"script/Mega/detection/md_v4.1.0.pb"
 countOriginal = 1
 countSharpen = 1
 countFinal = 1
@@ -31,6 +31,13 @@ countFinal = 1
 # parser.add_argument("-he", "--histequal", default=0, type=int, help="Automatically adjust contrast of keyframes")
 # parser.add_argument("-ae", "--autoenhance", default=1, type=int, help="Auto enhancement for keyframes")
 #
+def timeChangeToSecond(string):
+    array = string.split(":")
+    minutes = array[0]
+    seconds = int(array[1],base = 10)
+    seconds += int(minutes,base = 10) * 60
+    return seconds
+
 # args = parser.parse_args()
 # video_file = args.videofile
 # start_time = args.starttime
@@ -39,17 +46,55 @@ countFinal = 1
 # histResponse = args.histequal
 # autoResponse = args.autoenhance
 
+# parsed = json.loads(sys.argv[1])
+# start_time_string = parsed["startTime"]
+# end_time_string = parsed["endTime"]
+# superResponse = int(parsed["resolutionModel"])
+# histResponse = int(parsed["histogramEq"])
+# autoResponse = int(parsed["autoEnhance"])
+# video_file = parsed["path"]
+# parsed = json.loads(sys.argv[1])
+
+# parsed = sys.argv[1]
+# print(parsed)
+# start_time_string = sys.argv[1]["startTime"]
+# end_time_string = sys.argv[1]["endTime"]
+# superResponse = sys.argv[1]["resolutionModel"]
+# histResponse = sys.argv[1]["histogramEq"]
+# autoResponse = sys.argv[1]["autoEnhance"]
+# video_file = sys.argv[1]["path"]    # Folder to store results
+# print("Start time:" + start_time)
+# print("End time:" + end_time)
+# print("Resolution:" + superResponse)
+# print("Histogram:" + histResponse)
+# print("Enhance:" + autoResponse)
+# print("File path:" + video_file)
+
 video_file = sys.argv[1]
-start_time = int(sys.argv[2])
-end_time = int(sys.argv[3])
-superResponse = int(sys.argv[4])
-histResponse = int(sys.argv[5])
-autoResponse = int(sys.argv[6])
+print("File path:" + video_file)
+start_time_string = sys.argv[2]
+print("Start time:" + start_time_string)
+end_time_string = sys.argv[3]
+superResponse = int(sys.argv[4],base=10)
+histResponse = int(sys.argv[5],base=10)
+autoResponse = int(sys.argv[6],base=10)
+
+print("End time:" + end_time_string)
+# print("Resolution:" + str(superResponse))
+# print("Histogram:" + str(histResponse))
+# print("Enhance:" + str(autoResponse))
+# print(superResponse + 1)
+
+start_time = timeChangeToSecond(start_time_string)
+end_time = timeChangeToSecond(end_time_string)
+
+print(start_time)
+print(end_time)
 
 x = video_file.split("/")
 
-path = r"../../backEnd/results/Background/" + x[-1]  # Folder to store results
-output = r"../../backEnd/results/Mega/" + x[-1]
+path = r"results/Background/" + x[-1]  # Folder to store results
+output = r"results/Mega/" + x[-1]
 
 path = os.path.abspath(path)
 if os.path.isdir(path):
@@ -65,7 +110,7 @@ if os.path.isdir(output):
 else:
     os.mkdir(output)
 
-removed = r"../../backEnd/Background/Removed"
+removed = r"script/Background/Removed"
 removed = os.path.abspath(removed)
 if os.path.isdir(removed):
     shutil.rmtree(removed)
