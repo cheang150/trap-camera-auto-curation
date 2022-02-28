@@ -10,7 +10,7 @@ router.post("/", function (req, res, next) {
         }
         videoData.path = `${__dirname}/../public/${videoFile.name}`;
         //videoData = JSON.stringify(videoData);
-
+        var logging = [];
         try {
             var spawn = require("child_process").spawn;
             var process = spawn("python", [`script/main.py`, videoData.path, videoData.startTime, videoData.endTime, videoData.resolutionModel, videoData.histogramEq, videoData.autoEnhance]);
@@ -20,10 +20,11 @@ router.post("/", function (req, res, next) {
             });
 
             process.stdout.on("data", function (data) {
-                console.log(data.toString());
+                logging.push(data.toString());
             });
 
             process.on("close", (code) => {
+                console.log(logging)
                 console.log(`process quit with ${code}`);
                 res.send(`completed`);
             });

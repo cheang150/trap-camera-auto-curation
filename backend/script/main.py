@@ -42,18 +42,18 @@ superResponse = int(sys.argv[4],base=10)
 histResponse = int(sys.argv[5],base=10)
 autoResponse = int(sys.argv[6],base=10)
 
-print("File path:" + video_file)
-print("Start time:" + start_time_string)
-print("End time:" + end_time_string)
-print("Resolution:" + str(superResponse))
-print("Histogram:" + str(histResponse))
-print("Enhance:" + str(autoResponse))
+print("File path:" + video_file + '\n')
+print("Start time:" + start_time_string + '\n')
+print("End time:" + end_time_string + '\n')
+print("Resolution:" + str(superResponse) + '\n')
+print("Histogram:" + str(histResponse) + '\n')
+print("Enhance:" + str(autoResponse) + '\n')
 
 start_time = timeChangeToSecond(start_time_string)
 end_time = timeChangeToSecond(end_time_string)
 
-print(start_time)
-print(end_time)
+print(str(start_time) + '\n')
+print(str(end_time) + '\n')
 
 x = video_file.split("/")
 
@@ -114,13 +114,13 @@ def get_sec(time_str):
 
 modified_video = video_file + "_modified.mp4"
 video_time = str(datetime.timedelta(seconds=VideoFileClip(video_file).duration))
-print("Video length: " + video_time)
+print("Video length: " + video_time + '\n')
 text.write("Video length: " + video_time + '\n')
 video_seconds = get_sec(video_time)
 if start_time >= 0 and 0 < end_time <= video_seconds:
     ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
 else:
-    print("[-] Invalid input for clipping video duration")
+    print("[-] Invalid input for clipping video duration" + '\n')
     text.write("[-] Invalid input for clipping video duration" + '\n')
     exit()
 
@@ -133,7 +133,7 @@ elif superResponse == 2:
 elif superResponse == 3:
     superCounter = 3
 else:
-    print("[-] Invalid input for super resolution model")
+    print("[-] Invalid input for super resolution model" + '\n')
     text.write("[-] Invalid input for super resolution model" + '\n')
     exit()
 
@@ -144,7 +144,7 @@ if histResponse == 1:
 elif histResponse == 0:
     histCounter = 0
 else:
-    print("[-] Invalid input for histogram equalizer")
+    print("[-] Invalid input for histogram equalizer" + '\n')
     text.write("[-] Invalid input for histogram equalizer" + '\n')
     exit()
 
@@ -155,7 +155,7 @@ if autoResponse == 1:
 elif autoResponse == 0:
     autoCounter = 0
 else:
-    print("[-] Invalid input for auto enhancement")
+    print("[-] Invalid input for auto enhancement" + '\n')
     text.write("[-] Invalid input for auto enhancement" + '\n')
     exit()
 
@@ -163,7 +163,7 @@ else:
 # Motion Detection
 # ================
 # Capture frames from modified (clipped) video
-print("[+] Running...")
+print("[+] Running..." + '\n')
 text.write("[+] Running..." + '\n')
 cap = cv2.VideoCapture(modified_video)
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -202,12 +202,12 @@ while cap.isOpened():
         except:
             pass
         keyframes_lists = os.listdir(path)
-        print("Images Captured: " + str(countOriginal))
-        print("Images Filtered: " + str(countFinal))
-        print("Images Shortlisted: " + str(len(keyframes_lists)))
-        print("Background Subtraction results path: " + path)
+        print("Images Captured: " + str(countOriginal) + '\n')
+        print("Images Filtered: " + str(countFinal) + '\n')
+        print("Images Shortlisted: " + str(len(keyframes_lists)) + '\n')
+        print("Background Subtraction results path: " + path + '\n')
 
-        print("\n[+] Background Subtraction Process finished!")
+        print("[+] Background Subtraction Process finished!" + '\n')
 
         text.write("Images Captured: " + str(countOriginal) + '\n')
         text.write("Images Filtered: " + str(countFinal) + '\n')
@@ -223,17 +223,17 @@ while cap.isOpened():
         mega_keyframes_lists = os.listdir(output)
         keyframes_lists = os.listdir(path)
 
-        print("Images Received: " + str(initial_amount))
-        print("Images Selected: " + str(initial_amount - len(keyframes_lists)))
-        print("Images Created: " + str(len(mega_keyframes_lists)))
-        print("Mega results path: " + output)
-        print("\n[+] Mega Process finished!")
+        print("Images Received: " + str(initial_amount) + '\n')
+        print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
+        print("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
+        print("Mega results path: " + output + '\n')
+        print("[+] Mega Process finished!" + '\n')
 
         text.write("Images Received: " + str(initial_amount) + '\n')
         text.write("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
         text.write("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
         text.write("Mega results path: " + output + '\n')
-        text.write("[+] Mega Process finished!")
+        text.write("[+] Mega Process finished!" + '\n')
 
         text.close()
 
