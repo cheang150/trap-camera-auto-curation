@@ -59,19 +59,6 @@ x = video_file.split("/")
 
 path = r"results/Background/" + x[-1]  # Folder to store results
 output = r"results/Mega/" + x[-1]
-text_file = r"results/" + x[-1] + ".txt"
-
-text_file = os.path.abspath(text_file)
-text = open(text_file,"w+")
-
-text.write("File path:" + video_file + '\n')
-text.write("Start time:" + start_time_string + '\n')
-text.write("End time:" + end_time_string + '\n')
-text.write("Resolution:" + str(superResponse) + '\n')
-text.write("Histogram:" + str(histResponse) + '\n')
-text.write("Enhance:" + str(autoResponse) + '\n')
-text.write(str(start_time) + '\n')
-text.write(str(end_time) + '\n')
 
 path = os.path.abspath(path)
 if os.path.isdir(path):
@@ -115,13 +102,11 @@ def get_sec(time_str):
 modified_video = video_file + "_modified.mp4"
 video_time = str(datetime.timedelta(seconds=VideoFileClip(video_file).duration))
 print("Video length: " + video_time + '\n')
-text.write("Video length: " + video_time + '\n')
 video_seconds = get_sec(video_time)
 if start_time >= 0 and 0 < end_time <= video_seconds:
     ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
 else:
     print("[-] Invalid input for clipping video duration" + '\n')
-    text.write("[-] Invalid input for clipping video duration" + '\n')
     exit()
 
 # Super resolution pre-trained model response
@@ -134,7 +119,6 @@ elif superResponse == 3:
     superCounter = 3
 else:
     print("[-] Invalid input for super resolution model" + '\n')
-    text.write("[-] Invalid input for super resolution model" + '\n')
     exit()
 
 # Histogram Equalizer response
@@ -145,7 +129,6 @@ elif histResponse == 0:
     histCounter = 0
 else:
     print("[-] Invalid input for histogram equalizer" + '\n')
-    text.write("[-] Invalid input for histogram equalizer" + '\n')
     exit()
 
 # Auto Enhancement response
@@ -156,7 +139,6 @@ elif autoResponse == 0:
     autoCounter = 0
 else:
     print("[-] Invalid input for auto enhancement" + '\n')
-    text.write("[-] Invalid input for auto enhancement" + '\n')
     exit()
 
 # ================
@@ -164,7 +146,6 @@ else:
 # ================
 # Capture frames from modified (clipped) video
 print("[+] Running..." + '\n')
-text.write("[+] Running..." + '\n')
 cap = cv2.VideoCapture(modified_video)
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 success, img1 = cap.read()
@@ -207,12 +188,6 @@ while cap.isOpened():
         print("Background Subtraction results path: " + path + '\n')
 
         print("[+] Background Subtraction Process finished!" + '\n')
-
-        text.write("Images Captured: " + str(countOriginal) + '\n')
-        text.write("Images Filtered: " + str(countFinal) + '\n')
-        text.write("Images Shortlisted: " + str(len(keyframes_lists)) + '\n')
-        text.write("Background Subtraction results path: " + path + '\n')
-        text.write("[+] Background Subtraction Process finished! \n")
         # Call mega detector function here
 
         initial_amount = len(keyframes_lists)
@@ -227,14 +202,6 @@ while cap.isOpened():
         print("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
         print("Mega results path: " + output + '\n')
         print("[+] Mega Process finished!" + '\n')
-
-        text.write("Images Received: " + str(initial_amount) + '\n')
-        text.write("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
-        text.write("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
-        text.write("Mega results path: " + output + '\n')
-        text.write("[+] Mega Process finished!" + '\n')
-
-        text.close()
 
     # Skip frames function
     cf = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1
