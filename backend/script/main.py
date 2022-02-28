@@ -57,8 +57,8 @@ print(str(end_time) + '\n')
 
 x = video_file.split("/")
 
-path = r"results/Background/" + x[-1]  # Folder to store results
-output = r"results/Mega/" + x[-1]
+path = r"../frontend/src/results/Background/" + x[-1]  # Folder to store results
+output = r"../frontend/src/results/Mega/" + x[-1]
 
 path = os.path.abspath(path)
 if os.path.isdir(path):
@@ -177,8 +177,8 @@ while cap.isOpened():
         ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
         keyframes_lists = os.listdir(path)
         try:
-            ImageHash.compare_images(
-                path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
+            random.seed(30)
+            ImageHash.compare_images(path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
         except:
             pass
         keyframes_lists = os.listdir(path)
