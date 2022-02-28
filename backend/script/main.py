@@ -197,8 +197,7 @@ while cap.isOpened():
         keyframes_lists = os.listdir(path)
         try:
             ImageHash.compare_images(
-                video_file + "_Results/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path,
-                removed)
+                path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
         except:
             pass
         keyframes_lists = os.listdir(path)
