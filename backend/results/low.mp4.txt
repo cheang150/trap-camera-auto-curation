@@ -1,0 +1,5 @@
+Background Subtraction results path: C:\Users\chang\Documents\GitHub\Integrated\backend\results\Background\low.mp4
+Images Captured: 22
+Images Filtered: 22
+Images Shortlisted: 22
+Mega results path: C:\Users\chang\Documents\GitHub\Integrated\backend\results\Mega\low.mp4

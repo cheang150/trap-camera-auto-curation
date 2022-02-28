@@ -1,4 +1,3 @@
-#!/usr/bin/env 3.9
 import sys
 
 import cv2
@@ -95,6 +94,10 @@ x = video_file.split("/")
 
 path = r"results/Background/" + x[-1]  # Folder to store results
 output = r"results/Mega/" + x[-1]
+text_file = r"results/" + x[-1] + ".txt"
+
+text_file = os.path.abspath(text_file)
+text = open(text_file,"w+")
 
 path = os.path.abspath(path)
 if os.path.isdir(path):
@@ -213,14 +216,25 @@ while cap.isOpened():
         ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
         keyframes_lists = os.listdir(path)
         ImageHash.compare_images(path+"/" + keyframes_lists[random.randint(0, len(keyframes_lists))],path,removed)
+        print("Background Subtraction results path: " + path)
         print("Images Captured: " + str(countOriginal))
         print("Images Filtered: " + str(countSharpen))
         print("Images Shortlisted: " + str(countFinal))
-        print("\n[+] Process finished!")
+
+        print("\n[+] Background Subtraction Process finished!")
+
+        text.write("Background Subtraction results path: " + path + '\n')
+        text.write("Images Captured: " + str(countOriginal) + '\n')
+        text.write("Images Filtered: " + str(countSharpen) + '\n')
+        text.write("Images Shortlisted: " + str(countFinal) + '\n')
         # Call mega detector function here
 
         image_file_names = ImagePathUtils.find_images(path,"store_true")
         load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
+
+        print("Mega results path: " + output)
+        print("\n[+] Mega Process finished!")
+        text.write("Mega results path: " + output + '\n')
 
     # Skip frames function
     cf = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1
