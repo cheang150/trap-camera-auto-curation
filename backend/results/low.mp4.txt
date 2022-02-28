@@ -1,5 +1,20 @@
-Background Subtraction results path: C:\Users\chang\Documents\GitHub\Integrated\backend\results\Background\low.mp4
+File path:C:\Users\chang\Documents\GitHub\Integrated\backend\routes/../public/low.mp4
+Start time:00:00
+End time:6:00
+Resolution:1
+Histogram:1
+Enhance:1
+0
+360
+Video length: 0:14:59.970000
+[+] Running...
 Images Captured: 22
 Images Filtered: 22
-Images Shortlisted: 22
+Images Shortlisted: 4
+Background Subtraction results path: C:\Users\chang\Documents\GitHub\Integrated\backend\results\Background\low.mp4
+[+] Background Subtraction Process finished! 
+Images Received: 4
+Images Selected: 0
+Images Created: 0
 Mega results path: C:\Users\chang\Documents\GitHub\Integrated\backend\results\Mega\low.mp4
+[+] Mega Process finished!

@@ -69,8 +69,8 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 
 import tensorflow.compat.v1 as tf
 
-print('TensorFlow version:', tf.__version__)
-print('Is GPU available? tf.config.list_physical_devices(\'GPU\'):', tf.config.list_physical_devices('GPU'))
+# print('TensorFlow version:', tf.__version__)
+# print('Is GPU available? tf.config.list_physical_devices(\'GPU\'):', tf.config.list_physical_devices('GPU'))
 
 
 #%% Classes
@@ -206,7 +206,7 @@ class TFDetector:
 
         Returns: the loaded graph.
         """
-        print('TFDetector: Loading graph...')
+        # print('TFDetector: Loading graph...')
         detection_graph = tf.Graph()
         with detection_graph.as_default():
             od_graph_def = tf.GraphDef()
@@ -214,7 +214,7 @@ class TFDetector:
                 serialized_graph = fid.read()
                 od_graph_def.ParseFromString(serialized_graph)
                 tf.import_graph_def(od_graph_def, name='')
-        print('TFDetector: Detection graph loaded.')
+        # print('TFDetector: Detection graph loaded.')
 
         return detection_graph
 
@@ -278,7 +278,7 @@ class TFDetector:
 
         except Exception as e:
             result['failure'] = TFDetector.FAILURE_TF_INFER
-            print('TFDetector: image {} failed during inference: {}'.format(image_id, str(e)))
+            # print('TFDetector: image {} failed during inference: {}'.format(image_id, str(e)))
 
         return result
 
@@ -298,7 +298,7 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
     start_time = time.time()
     tf_detector = TFDetector(model_file)
     elapsed = time.time() - start_time
-    print('Loaded model in {}'.format(humanfriendly.format_timespan(elapsed)))
+    # print('Loaded model in {}'.format(humanfriendly.format_timespan(elapsed)))
 
     detection_results = []
     time_load = []
@@ -363,7 +363,7 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
             time_load.append(elapsed)
 
         except Exception as e:
-            print('Image {} cannot be loaded. Exception: {}'.format(im_file, e))
+            # print('Image {} cannot be loaded. Exception: {}'.format(im_file, e))
             result = {
                 'file': im_file,
                 'failure': TFDetector.FAILURE_IMAGE_OPEN
@@ -381,7 +381,7 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
             time_infer.append(elapsed)
 
         except Exception as e:
-            print('An error occurred while running the detector on image {}. Exception: {}'.format(im_file, e))
+            # print('An error occurred while running the detector on image {}. Exception: {}'.format(im_file, e))
             continue
 
         try:
@@ -408,7 +408,7 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
                 List.append(os.path.abspath(im_file))
 
         except Exception as e:
-            print('Visualizing results on the image {} failed. Exception: {}'.format(im_file, e))
+            # print('Visualizing results on the image {} failed. Exception: {}'.format(im_file, e))
             continue
 
     # ...for each image
@@ -423,11 +423,11 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
     else:
         std_dev_time_load = 'not available'
         std_dev_time_infer = 'not available'
-    print('On average, for each image,')
-    print('- loading took {}, std dev is {}'.format(humanfriendly.format_timespan(ave_time_load),
-                                                    std_dev_time_load))
-    print('- inference took {}, std dev is {}'.format(humanfriendly.format_timespan(ave_time_infer),
-                                                      std_dev_time_infer))
+    # print('On average, for each image,')
+    # print('- loading took {}, std dev is {}'.format(humanfriendly.format_timespan(ave_time_load),
+    #                                                 std_dev_time_load))
+    # print('- inference took {}, std dev is {}'.format(humanfriendly.format_timespan(ave_time_infer),
+    #                                                   std_dev_time_infer))
 
 
 #%% Command-line driver
