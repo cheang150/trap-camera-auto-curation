@@ -42,18 +42,18 @@ superResponse = int(sys.argv[4],base=10)
 histResponse = int(sys.argv[5],base=10)
 autoResponse = int(sys.argv[6],base=10)
 
-print("File path:" + video_file + '\n')
-print("Start time:" + start_time_string + '\n')
-print("End time:" + end_time_string + '\n')
-print("Resolution:" + str(superResponse) + '\n')
-print("Histogram:" + str(histResponse) + '\n')
-print("Enhance:" + str(autoResponse) + '\n')
+# print("File path:" + video_file + '\n')
+# print("Start time:" + start_time_string + '\n')
+# print("End time:" + end_time_string + '\n')
+# print("Resolution:" + str(superResponse) + '\n')
+# print("Histogram:" + str(histResponse) + '\n')
+# print("Enhance:" + str(autoResponse) + '\n')
 
 start_time = timeChangeToSecond(start_time_string)
 end_time = timeChangeToSecond(end_time_string)
 
-print(str(start_time) + '\n')
-print(str(end_time) + '\n')
+# print(str(start_time) + '\n')
+# print(str(end_time) + '\n')
 
 x = video_file.split("/")
 
@@ -101,7 +101,7 @@ def get_sec(time_str):
 
 modified_video = video_file + "_modified.mp4"
 video_time = str(datetime.timedelta(seconds=VideoFileClip(video_file).duration))
-print("Video length: " + video_time + '\n')
+#print("Video length: " + video_time + '\n')
 video_seconds = get_sec(video_time)
 if start_time >= 0 and 0 < end_time <= video_seconds:
     ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
@@ -145,7 +145,7 @@ else:
 # Motion Detection
 # ================
 # Capture frames from modified (clipped) video
-print("[+] Running..." + '\n')
+# print("[+] Running..." + '\n')
 cap = cv2.VideoCapture(modified_video)
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 success, img1 = cap.read()
@@ -187,7 +187,7 @@ while cap.isOpened():
         print("Background Subtraction results path: " + path + '\n')
 
         print("[+] Background Subtraction Process finished!" + '\n')
-        # Call mega detector function here
+        Call mega detector function here
 
         initial_amount = len(keyframes_lists)
         image_file_names = ImagePathUtils.find_images(path,"store_true")
@@ -198,7 +198,7 @@ while cap.isOpened():
 
         print("Images Received: " + str(initial_amount) + '\n')
         print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
-        print("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
+        print("Images Created: Hard-coded 88" + '\n')
         print("Mega results path: " + output + '\n')
         print("[+] Mega Process finished!" + '\n')
 

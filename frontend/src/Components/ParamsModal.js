@@ -47,41 +47,43 @@ function ParamsModal(props) {
       })
         .then((res) => res.text())
         .then((res) => {
-          const response = res.split(",");
-          const shortlistedPath = response[7].split("\\n")[3].slice(37, -1);
-          const potentialPath = response[9].split("\\n")[2].slice(19, -1);
-          const framesAnalysed = response[6].split("\\r")[0].slice(17);
-          const framesSelected = response[8].split("\\r")[0].slice(17);
-          const invertebratesDetected = response[8].split("\\r")[2].slice(18);
-          console.log(shortlistedPath);
-          console.log(potentialPath);
-          console.log(framesAnalysed);
-          console.log(framesSelected);
-          console.log(invertebratesDetected);
+          const response = res.split(",")[0];
+          console.log(response);
+          const shortlistedPath = response.split("\\n")[11].slice(19, -2)
+          const potentialPath = response.split("\\n")[7].slice(37, -2)
+          const framesAnalysed = response.split("\\r")[3].slice(19)
+          const framesSelected = response.split("\\r")[5].slice(22)
+          const invertebratesDetected = response.split("\\r")[10].slice(18)
+          props.setStatistics({framesAnalysed: framesAnalysed, framesSelected: framesSelected, invertebratesDetected: invertebratesDetected});
           fetch(`http://localhost:9000/python?path=${shortlistedPath}`)
             .then((res) => res.text())
             .then((res) => {
               const buffers = res.split(",");
-              for (var buffer of buffers) {
-                const blob = b64toblob(buffer, "jpeg");
-                props.setShortlisted((prev) => [
-                  ...prev,
-                  URL.createObjectURL(blob),
-                ]);
+              if (buffers[0] !== "") {
+                for (var buffer of buffers) {
+                  const blob = b64toblob(buffer, "jpeg");
+                  props.setShortlisted((prev) => [
+                    ...prev,
+                    URL.createObjectURL(blob),
+                  ]);
+                }
               }
             });
           fetch(`http://localhost:9000/python?path=${potentialPath}`)
             .then((res) => res.text())
             .then((res) => {
               const buffers = res.split(",");
-              for (var buffer of buffers) {
-                const blob = b64toblob(buffer, "jpg");
-                props.setPotential((prev) => [
-                  ...prev,
-                  URL.createObjectURL(blob),
-                ]);
+              if (buffers[0] !== "") {
+                for (var buffer of buffers) {
+                  const blob = b64toblob(buffer, "jpg");
+                  props.setPotential((prev) => [
+                    ...prev,
+                    URL.createObjectURL(blob),
+                  ]);
+                }
               }
             });
+            props.setProcessing(false);
         });
 
       props.setProcessedVideos((prev) => [...prev, selection.name]);
@@ -92,7 +94,7 @@ function ParamsModal(props) {
         prev.filter((video) => video.name !== selection.name)
       );
     }
-    props.setProcessing(false);
+    
   };
 
   const handleCancel = () => {

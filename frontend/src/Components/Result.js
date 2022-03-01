@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import Title from "./Title";
 import Filter from "./Filter";
 import "./Result.css";
@@ -26,7 +26,7 @@ function Result(props) {
     y: 25,
   });
   const [completedCrop, setCompletedCrop] = useState(null);
-  const imgRef = useRef(null);
+    const imgRef = useRef(null);
 
   const handleReject = (idx) => {
     console.log(idx);
@@ -79,13 +79,13 @@ function Result(props) {
       function (blob) {
         var url = URL.createObjectURL(blob);
         if (category === "shortlisted") {
-          let temp = props.shortlisted.slice();
-          temp[index] = url;
-          props.setShortlisted(temp);
+            let temp = props.shortlisted;
+            temp[index] = url;
+            props.setShortlisted(temp);
         } else if (category === "potential") {
-          let temp = props.shortlisted.slice();
-          temp[index] = url;
-          props.setPotential(temp);
+            let temp = props.potential;
+            temp[index] = url;
+            props.setPotential(temp);
         }
       },
       "image/jpeg",
@@ -126,7 +126,7 @@ function Result(props) {
         }
       });
     });
-  };
+    };
 
   return (
     <div id="result">
@@ -137,13 +137,10 @@ function Result(props) {
       ) : null}
 
       <Title sectionTitle="Results" line={true} />
-      <div className="resultFilter">
-        <Filter filterList={props.processedVideos} />
-      </div>
 
       <div className="statistics">
         <div className="stat">
-          <h3>54000</h3>
+          <h3>{props.statistics.framesAnalysed}</h3>
           <p>
             Frames
             <br />
@@ -151,7 +148,7 @@ function Result(props) {
           </p>
         </div>
         <div className="stat">
-          <h3>351</h3>
+          <h3>{props.statistics.framesSelected}</h3>
           <p>
             Frames
             <br />
@@ -159,7 +156,7 @@ function Result(props) {
           </p>
         </div>
         <div className="stat">
-          <h3>182</h3>
+          <h3>{props.statistics.invertebratesDetected}</h3>
           <p>
             Invertebrates
             <br />
@@ -219,7 +216,8 @@ function Result(props) {
           </div>
         </Modal>
 
-        <div className="photoList">
+              <div className="photoList">
+                  {console.log(props.shortlisted)}
           {props.shortlisted.map((p, index) => (
             <div className="photo" key={index}>
               <img src={p} alt="shortlisted" className="photoSrc" />
@@ -258,7 +256,8 @@ function Result(props) {
 
       <div className="potential">
         <Title sectionTitle="Potential Candidates" line={false} />
-        <div className="photoList">
+              <div className="photoList">
+                  {console.log(props.potential)}
           {props.potential.map((p, index) => (
             <div className="photo" key={index}>
               <img src={p} alt="shortlisted" className="photoSrc" />

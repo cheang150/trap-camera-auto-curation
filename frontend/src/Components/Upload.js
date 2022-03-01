@@ -7,6 +7,7 @@ import Title from "./Title";
 import "./Upload.css";
 import UploadBox from "./UploadBox";
 
+
 function Upload(props) {
   const uploadRef = useRef(null);
   const [videos, setVideos] = useState([]);
@@ -77,7 +78,7 @@ function Upload(props) {
       </div>
 
       {videos.length === 0 ? (
-        <UploadBox uploadRef={uploadRef} />
+        <UploadBox uploadRef={uploadRef} loading={loading} />
       ) : (
         <React.Fragment>
           <TableBox
@@ -97,6 +98,7 @@ function Upload(props) {
             loading={loading}
             setProcessedVideos={props.setProcessedVideos}
             setVideos={setVideos}
+            setStatistics={props.setStatistics}
           />
         </React.Fragment>
       )}

@@ -3,16 +3,14 @@ import "./App.css";
 import Overview from "./Components/Overview";
 import Result from "./Components/Result";
 import Upload from "./Components/Upload";
-import tree from "./img/tree.jpeg";
-import sunset from "./img/sunset.jpeg";
-import house from "./img/house.jpg";
 
 function App() {
   const [processing, setProcessing] = useState(null);
-  const [shortlisted, setShortlisted] = useState([tree, sunset, house]);
-  const [potential, setPotential] = useState([tree, sunset, house]);
+  const [shortlisted, setShortlisted] = useState([]);
+  const [potential, setPotential] = useState([]);
   const [selections, setSelections] = useState([]);
   const [processedVideos, setProcessedVideos] = useState([]);
+  const [statistics, setStatistics] = useState({framesAnalysed: 0, framesSelected: 0, invertebratesDetected: 0});
 
   return (
     <div className="App">
@@ -24,6 +22,7 @@ function App() {
         selections={selections}
         setSelections={setSelections}
         setProcessedVideos={setProcessedVideos}
+        setStatistics={setStatistics}
       />
       {processing === null ? null : (
         <Result
@@ -33,6 +32,7 @@ function App() {
           setShortlisted={setShortlisted}
           setPotential={setPotential}
           processedVideos={processedVideos}
+          statistics={statistics}
         />
       )}
     </div>
