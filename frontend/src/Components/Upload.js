@@ -7,7 +7,6 @@ import Title from "./Title";
 import "./Upload.css";
 import UploadBox from "./UploadBox";
 
-
 function Upload(props) {
   const uploadRef = useRef(null);
   const [videos, setVideos] = useState([]);

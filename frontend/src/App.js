@@ -10,7 +10,11 @@ function App() {
   const [potential, setPotential] = useState([]);
   const [selections, setSelections] = useState([]);
   const [processedVideos, setProcessedVideos] = useState([]);
-  const [statistics, setStatistics] = useState({framesAnalysed: 0, framesSelected: 0, invertebratesDetected: 0});
+  const [statistics, setStatistics] = useState({
+    framesAnalysed: 0,
+    framesSelected: 0,
+    invertebratesDetected: 0,
+  });
 
   return (
     <div className="App">

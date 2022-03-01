@@ -1,6 +1,5 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import Title from "./Title";
-import Filter from "./Filter";
 import "./Result.css";
 import expand from "../img/expand.svg";
 import edit from "../img/edit.svg";
@@ -26,7 +25,7 @@ function Result(props) {
     y: 25,
   });
   const [completedCrop, setCompletedCrop] = useState(null);
-    const imgRef = useRef(null);
+  const imgRef = useRef(null);
 
   const handleReject = (idx) => {
     console.log(idx);
@@ -79,13 +78,13 @@ function Result(props) {
       function (blob) {
         var url = URL.createObjectURL(blob);
         if (category === "shortlisted") {
-            let temp = props.shortlisted;
-            temp[index] = url;
-            props.setShortlisted(temp);
+          let temp = props.shortlisted.slice();
+          temp[index] = url;
+          props.setShortlisted(temp);
         } else if (category === "potential") {
-            let temp = props.potential;
-            temp[index] = url;
-            props.setPotential(temp);
+          let temp = props.potential.slice();
+          temp[index] = url;
+          props.setPotential(temp);
         }
       },
       "image/jpeg",
@@ -126,7 +125,7 @@ function Result(props) {
         }
       });
     });
-    };
+  };
 
   return (
     <div id="result">
@@ -216,8 +215,7 @@ function Result(props) {
           </div>
         </Modal>
 
-              <div className="photoList">
-                  {console.log(props.shortlisted)}
+        <div className="photoList">
           {props.shortlisted.map((p, index) => (
             <div className="photo" key={index}>
               <img src={p} alt="shortlisted" className="photoSrc" />
@@ -256,8 +254,7 @@ function Result(props) {
 
       <div className="potential">
         <Title sectionTitle="Potential Candidates" line={false} />
-              <div className="photoList">
-                  {console.log(props.potential)}
+        <div className="photoList">
           {props.potential.map((p, index) => (
             <div className="photo" key={index}>
               <img src={p} alt="shortlisted" className="photoSrc" />

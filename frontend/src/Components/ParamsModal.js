@@ -24,7 +24,6 @@ function ParamsModal(props) {
     return new Blob([byteArray], { type: `image/${fileType}` });
   };
 
-  // Link to python and set shortlisted and potentail here
   const handleSave = () => {
     setModelOpen(false);
     props.setProcessing(true);
@@ -49,12 +48,18 @@ function ParamsModal(props) {
         .then((res) => {
           const response = res.split(",")[0];
           console.log(response);
-          const shortlistedPath = response.split("\\n")[11].slice(19, -2)
-          const potentialPath = response.split("\\n")[7].slice(37, -2)
-          const framesAnalysed = response.split("\\r")[3].slice(19)
-          const framesSelected = response.split("\\r")[5].slice(22)
-          const invertebratesDetected = response.split("\\r")[10].slice(18)
-          props.setStatistics({framesAnalysed: framesAnalysed, framesSelected: framesSelected, invertebratesDetected: invertebratesDetected});
+          const shortlistedPath = response.split("\\n")[11].slice(19, -2);
+          const potentialPath = response.split("\\n")[7].slice(37, -2);
+          const framesAnalysed = response.split("\\r")[3].slice(19);
+          const framesSelected = response.split("\\r")[5].slice(22);
+          const invertebratesDetected = response.split("\\r")[9].slice(18);
+
+          props.setStatistics({
+            framesAnalysed: framesAnalysed,
+            framesSelected: framesSelected,
+            invertebratesDetected: invertebratesDetected,
+          });
+
           fetch(`http://localhost:9000/python?path=${shortlistedPath}`)
             .then((res) => res.text())
             .then((res) => {
@@ -83,7 +88,7 @@ function ParamsModal(props) {
                 }
               }
             });
-            props.setProcessing(false);
+          props.setProcessing(false);
         });
 
       props.setProcessedVideos((prev) => [...prev, selection.name]);
@@ -94,7 +99,6 @@ function ParamsModal(props) {
         prev.filter((video) => video.name !== selection.name)
       );
     }
-    
   };
 
   const handleCancel = () => {
