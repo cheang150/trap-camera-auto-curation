@@ -14,6 +14,16 @@ function ParamsModal(props) {
     setModelOpen(true);
   };
 
+  const b64toblob = (string, fileType) => {
+    const byteCharacters = atob(string);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: `image/${fileType}` });
+  };
+
   // Link to python and set shortlisted and potentail here
   const handleSave = () => {
     setModelOpen(false);
@@ -36,7 +46,43 @@ function ParamsModal(props) {
         body: file,
       })
         .then((res) => res.text())
-        .then((res) => console.log(res));
+        .then((res) => {
+          const response = res.split(",");
+          const shortlistedPath = response[7].split("\\n")[3].slice(37, -1);
+          const potentialPath = response[9].split("\\n")[2].slice(19, -1);
+          const framesAnalysed = response[6].split("\\r")[0].slice(17);
+          const framesSelected = response[8].split("\\r")[0].slice(17);
+          const invertebratesDetected = response[8].split("\\r")[2].slice(18);
+          console.log(shortlistedPath);
+          console.log(potentialPath);
+          console.log(framesAnalysed);
+          console.log(framesSelected);
+          console.log(invertebratesDetected);
+          fetch(`http://localhost:9000/python?path=${shortlistedPath}`)
+            .then((res) => res.text())
+            .then((res) => {
+              const buffers = res.split(",");
+              for (var buffer of buffers) {
+                const blob = b64toblob(buffer, "jpeg");
+                props.setShortlisted((prev) => [
+                  ...prev,
+                  URL.createObjectURL(blob),
+                ]);
+              }
+            });
+          fetch(`http://localhost:9000/python?path=${potentialPath}`)
+            .then((res) => res.text())
+            .then((res) => {
+              const buffers = res.split(",");
+              for (var buffer of buffers) {
+                const blob = b64toblob(buffer, "jpg");
+                props.setPotential((prev) => [
+                  ...prev,
+                  URL.createObjectURL(blob),
+                ]);
+              }
+            });
+        });
 
       props.setProcessedVideos((prev) => [...prev, selection.name]);
       props.setVideos((prev) =>
