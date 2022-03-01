@@ -48,11 +48,16 @@ function ParamsModal(props) {
         .then((res) => {
           const response = res.split(",")[0];
           console.log(response);
-          const shortlistedPath = response.split("\\n")[11].slice(19, -2);
-          const potentialPath = response.split("\\n")[7].slice(37, -2);
-          const framesAnalysed = response.split("\\r")[3].slice(19);
-          const framesSelected = response.split("\\r")[5].slice(22);
-          const invertebratesDetected = response.split("\\r")[9].slice(18);
+          const shortlistedPath = response.split("\\n");
+          const potentialPath = response.split("\\n");
+          const framesAnalysed = response.split("\\r");
+          const framesSelected = response.split("\\r");
+          const invertebratesDetected = response.split("\\r");
+          console.log(shortlistedPath)
+          console.log(potentialPath)
+          console.log(framesAnalysed)
+          console.log(framesSelected)
+          console.log(invertebratesDetected)
 
           props.setStatistics({
             framesAnalysed: framesAnalysed,

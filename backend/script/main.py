@@ -12,7 +12,7 @@ import Background.ImageHash as ImageHash
 import Background.CheckBlurness as CheckBlurness
 import Background.Enhancement as Enhancement
 
-from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
+#from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
 
 DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.85
 MEGA_MODEL_FILE_PATH = r"script/Mega/detection/md_v4.1.0.pb"
@@ -182,25 +182,25 @@ while cap.isOpened():
             pass
         keyframes_lists = os.listdir(path)
         print("Images Captured: " + str(countOriginal) + '\n')
-        print("Images Filtered: " + str(countFinal) + '\n')
+        #print("Images Filtered: " + str(countFinal) + '\n')
         print("Images Shortlisted: " + str(len(keyframes_lists)) + '\n')
         print("Background Subtraction results path: " + path + '\n')
 
-        print("[+] Background Subtraction Process finished!" + '\n')
-        Call mega detector function here
+        # print("[+] Background Subtraction Process finished!" + '\n')
+        # Call mega detector function here
 
-        initial_amount = len(keyframes_lists)
-        image_file_names = ImagePathUtils.find_images(path,"store_true")
-        load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
+        # initial_amount = len(keyframes_lists)
+        # image_file_names = ImagePathUtils.find_images(path,"store_true")
+        # load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
 
-        mega_keyframes_lists = os.listdir(output)
-        keyframes_lists = os.listdir(path)
+        # mega_keyframes_lists = os.listdir(output)
+        # keyframes_lists = os.listdir(path)
 
-        print("Images Received: " + str(initial_amount) + '\n')
-        print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
-        print("Images Created: Hard-coded 88" + '\n')
+        #print("Images Received: " + str(initial_amount) + '\n')
+        #print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
+        print("Images Created: Hard-coded mega" + '\n')
         print("Mega results path: " + output + '\n')
-        print("[+] Mega Process finished!" + '\n')
+        #print("[+] Mega Process finished!" + '\n')
 
     # Skip frames function
     cf = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1
