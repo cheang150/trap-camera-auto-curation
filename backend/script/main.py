@@ -177,7 +177,6 @@ while cap.isOpened():
         ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
         keyframes_lists = os.listdir(path)
         try:
-            random.seed(30)
             ImageHash.compare_images(path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
         except:
             pass
