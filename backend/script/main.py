@@ -12,7 +12,7 @@ import Background.ImageHash as ImageHash
 import Background.CheckBlurness as CheckBlurness
 import Background.Enhancement as Enhancement
 
-#from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
+from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
 
 DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.85
 MEGA_MODEL_FILE_PATH = r"script/Mega/detection/md_v4.1.0.pb"
@@ -20,14 +20,6 @@ countOriginal = 1
 countSharpen = 1
 countFinal = 1
 
-# parser = argparse.ArgumentParser(description='Smart Camera Command Prompt')
-# parser.add_argument("-vf", "--videofile", required=True, type=str, help="This is your video file to process")
-# parser.add_argument("-st", "--starttime", default=0, type=int, help="Start time of video file to process")
-# parser.add_argument("-et", "--endtime", required=True, type=int, help="End time of video file to process")
-# parser.add_argument("-sr", "--superres", default=1, type=int, help="Super resolution model to upscale keyframes")
-# parser.add_argument("-he", "--histequal", default=0, type=int, help="Automatically adjust contrast of keyframes")
-# parser.add_argument("-ae", "--autoenhance", default=1, type=int, help="Auto enhancement for keyframes")
-#
 def timeChangeToSecond(string):
     array = string.split(":")
     minutes = array[0]
@@ -42,18 +34,8 @@ superResponse = int(sys.argv[4],base=10)
 histResponse = int(sys.argv[5],base=10)
 autoResponse = int(sys.argv[6],base=10)
 
-# print("File path:" + video_file + '\n')
-# print("Start time:" + start_time_string + '\n')
-# print("End time:" + end_time_string + '\n')
-# print("Resolution:" + str(superResponse) + '\n')
-# print("Histogram:" + str(histResponse) + '\n')
-# print("Enhance:" + str(autoResponse) + '\n')
-
 start_time = timeChangeToSecond(start_time_string)
 end_time = timeChangeToSecond(end_time_string)
-
-# print(str(start_time) + '\n')
-# print(str(end_time) + '\n')
 
 x = video_file.split("/")
 
@@ -101,7 +83,6 @@ def get_sec(time_str):
 
 modified_video = video_file + "_modified.mp4"
 video_time = str(datetime.timedelta(seconds=VideoFileClip(video_file).duration))
-#print("Video length: " + video_time + '\n')
 video_seconds = get_sec(video_time)
 if start_time >= 0 and 0 < end_time <= video_seconds:
     ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
@@ -145,7 +126,6 @@ else:
 # Motion Detection
 # ================
 # Capture frames from modified (clipped) video
-# print("[+] Running..." + '\n')
 cap = cv2.VideoCapture(modified_video)
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 success, img1 = cap.read()
@@ -189,18 +169,27 @@ while cap.isOpened():
         # print("[+] Background Subtraction Process finished!" + '\n')
         # Call mega detector function here
 
-        # initial_amount = len(keyframes_lists)
-        # image_file_names = ImagePathUtils.find_images(path,"store_true")
-        # load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
+        initial_amount = len(keyframes_lists)
+        image_file_names = ImagePathUtils.find_images(path,"store_true")
+        load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
 
-        # mega_keyframes_lists = os.listdir(output)
-        # keyframes_lists = os.listdir(path)
+        mega_keyframes_lists = os.listdir(output)
+        keyframes_lists = os.listdir(path)
 
         #print("Images Received: " + str(initial_amount) + '\n')
         #print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
-        print("Images Created: Hard-coded mega" + '\n')
+        print("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
         print("Mega results path: " + output + '\n')
         #print("[+] Mega Process finished!" + '\n')
+
+        # Call mega detector function here
+
+        # initial_amount = len(keyframes_lists)
+        # image_file_names = ImagePathUtils.find_images(path,"store_true")
+        # load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
+        #
+        # mega_keyframes_lists = os.listdir(output)
+        #
 
     # Skip frames function
     cf = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1

@@ -46,13 +46,13 @@ function ParamsModal(props) {
       })
         .then((res) => res.text())
         .then((res) => {
-          const response = res.split(",")[0];
+          const response = res.split(": ");
           console.log(response);
-          const shortlistedPath = response.split("\\n");
-          const potentialPath = response.split("\\n");
-          const framesAnalysed = response.split("\\r");
-          const framesSelected = response.split("\\r");
-          const invertebratesDetected = response.split("\\r");
+          const shortlistedPath = response[3].split("\\r\\n")[0];
+          const potentialPath = response[5].split("\\r\\n")[0];
+          const framesAnalysed = response[1].split("\\r")[0];
+          const framesSelected = response[2].split("\\r")[0];
+          const invertebratesDetected = response[4].split("\\r")[0];
           console.log(shortlistedPath)
           console.log(potentialPath)
           console.log(framesAnalysed)
