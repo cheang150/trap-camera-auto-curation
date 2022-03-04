@@ -7,7 +7,7 @@ Modal.setAppElement("#root");
 function ParamsModal(props) {
   const [modalOpen, setModelOpen] = useState(false);
   const [resolutionModel, setResolutionModel] = useState(1);
-  const [histogramEq, setHistogramEq] = useState(1);
+  const [histogramEq, setHistogramEq] = useState(0);
   const [autoEnhance, setAutoEnhance] = useState(1);
 
   const handleOpen = () => {
@@ -47,17 +47,11 @@ function ParamsModal(props) {
         .then((res) => res.text())
         .then((res) => {
           const response = res.split(": ");
-          console.log(response);
-          const shortlistedPath = response[3].split("\\r\\n")[0];
-          const potentialPath = response[5].split("\\r\\n")[0];
+          const shortlistedPath = response[5].split("\\r\\n")[0];
+          const potentialPath = response[3].split("\\r\\n")[0];
           const framesAnalysed = response[1].split("\\r")[0];
           const framesSelected = response[2].split("\\r")[0];
           const invertebratesDetected = response[4].split("\\r")[0];
-          console.log(shortlistedPath)
-          console.log(potentialPath)
-          console.log(framesAnalysed)
-          console.log(framesSelected)
-          console.log(invertebratesDetected)
 
           props.setStatistics({
             framesAnalysed: framesAnalysed,
@@ -160,7 +154,7 @@ function ParamsModal(props) {
             </div>
             <div className="data">
               <h3>Super-resolution Model</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing.</p>
+              <p>Upscale images with minimal quality degradation.</p>
               <div className="buttonGrp">
                 <button
                   id={resolutionModel === 1 ? "resModelButton" : null}

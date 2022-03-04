@@ -175,7 +175,7 @@ function Result(props) {
         >
           <img src={expanded} alt="expand" className="expandPhoto" />
           <div className="expandTools">
-            <a href={expanded} download>
+            <a href={expanded} download="auto-curation-result.jpeg">
               <img src={download} alt="download icon" className="expandTool" />
             </a>
             <img

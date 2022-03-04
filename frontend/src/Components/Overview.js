@@ -10,9 +10,10 @@ function Overview() {
       <div className="box">
         <h1>Camera Auto Curation</h1>
         <p id="description">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s.
+          This web application is implemented using React as frontend and
+          Express to serve the backend. The backend consists of two major
+          components, namely Background Subtraction for motion detection and
+          MegaDetector for subject detection.
         </p>
         <a
           href="https://github.com/cheang150/trap-camera-auto-curation"
