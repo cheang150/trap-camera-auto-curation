@@ -17,3 +17,9 @@ You will also see any lint errors in the console.
 **For first time setup, locate the directory and run `npm install`.**
 
 Run `npm start` in the backend directory terminal.
+
+## GitHub Pages
+
+Open [https://cheang150.github.io/trap-camera-auto-curation/](https://cheang150.github.io/trap-camera-auto-curation/) to view the dummy front end web application.
+
+**GitHub Pages is simple a prototype of the front end web application without any back end integration with the video processing scripts.**
