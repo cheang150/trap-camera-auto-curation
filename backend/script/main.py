@@ -14,7 +14,7 @@ import Background.Enhancement as Enhancement
 
 from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
 
-DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.85
+DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.78
 MEGA_MODEL_FILE_PATH = r"script/Mega/detection/md_v4.1.0.pb"
 countOriginal = 1
 countSharpen = 1
@@ -156,10 +156,10 @@ while cap.isOpened():
     if success is False:
         ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
         keyframes_lists = os.listdir(path)
-        try:
-            ImageHash.compare_images(path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
-        except:
-            pass
+        # try:
+        #     ImageHash.compare_images(path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
+        # except:
+        #     pass
         keyframes_lists = os.listdir(path)
         print("Images Captured: " + str(countOriginal) + '\n')
         #print("Images Filtered: " + str(countFinal) + '\n')
