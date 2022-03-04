@@ -254,6 +254,7 @@ def render_detection_bounding_boxes(detections, image,
                                     confidence_threshold=0.8, thickness=4, expansion=0,
                                     classification_confidence_threshold=0.3,
                                     max_classifications=3):
+
     """
     Renders bounding boxes, label, and confidence on an image if confidence is above the threshold.
 
