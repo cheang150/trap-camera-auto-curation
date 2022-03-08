@@ -154,12 +154,11 @@ def background_subtraction(imgBS_one, imgBS_two):
 while cap.isOpened():
     success, img2 = cap.read()
     if success is False:
-        ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
-        keyframes_lists = os.listdir(path)
-        # try:
-        #     ImageHash.compare_images(path + "/" + keyframes_lists[random.randint(0, len(keyframes_lists))], path, removed)
-        # except:
-        #     pass
+        try:
+            ImageHash.compare_images(path+"/Final 8.jpeg",path,removed)
+            keyframes_lists = os.listdir(path)
+        except:
+            pass
         keyframes_lists = os.listdir(path)
         print("Images Captured: " + str(countOriginal) + '\n')
         #print("Images Filtered: " + str(countFinal) + '\n')
