@@ -22,7 +22,9 @@ function TableBox(props) {
       if (
         !isNaN(parseInt(splitedTime[0])) &&
         parseInt(splitedTime[1]) < 60 &&
-        e.target.value[2] === ":"
+        e.target.value[2] === ":" &&
+        parseInt(splitedTime[0]) <= parseInt(video.endTime.split(":")[0]) &&
+        parseInt(splitedTime[1]) < parseInt(video.endTime.split(":")[1])
       ) {
         e.target.id = "";
         video.startTime = e.target.value;
