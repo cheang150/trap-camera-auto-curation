@@ -87,8 +87,8 @@ video_seconds = get_sec(video_time)
 if start_time >= 0 and 0 < end_time <= video_seconds:
     ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
 else:
-    print("[-] Invalid input for clipping video duration" + '\n')
-    exit()
+    end_time = video_seconds
+    ffmpeg_extract_subclip(video_file, start_time, end_time, targetname=modified_video)
 
 # Super resolution pre-trained model response
 superCounter = 1
