@@ -11,9 +11,9 @@ function Overview() {
         <h1>Camera Auto Curation</h1>
         <p id="description">
           This web application is implemented using React as frontend and
-          Express to serve the backend. The backend consists of two major
-          components, namely Background Subtraction for motion detection and
-          MegaDetector for subject detection.
+          Express to serve the backend. The video processing consists of two
+          major components, namely Background Subtraction for motion detection
+          and MegaDetector for subject detection.
         </p>
         <a
           href="https://github.com/cheang150/trap-camera-auto-curation"

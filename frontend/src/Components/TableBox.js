@@ -16,27 +16,57 @@ function TableBox(props) {
   };
 
   const handleStartTime = (e, video) => {
-    video.startTime = e.target.value;
-    for (var selection of props.selections) {
-      if (selection.name === video.name) {
-        props.setSelections((prev) => [
-          ...prev.filter((selection) => selection.name !== video.name),
-          video,
-        ]);
-        break;
+    e.target.id = "changingTime";
+    if (e.target.value.length === 5) {
+      const splitedTime = e.target.value.split(":");
+      if (
+        !isNaN(parseInt(splitedTime[0])) &&
+        parseInt(splitedTime[1]) < 60 &&
+        e.target.value[2] === ":"
+      ) {
+        e.target.id = "";
+        video.startTime = e.target.value;
+        for (var selection of props.selections) {
+          if (selection.name === video.name) {
+            props.setSelections((prev) => [
+              ...prev.filter((selection) => selection.name !== video.name),
+              video,
+            ]);
+            break;
+          }
+        }
+      } else {
+        alert(`Invalid start time format (MM:SS) for ${video.name}`);
+        e.target.value = "00:00";
+        e.target.id = "";
       }
     }
   };
 
   const handleEndTime = (e, video) => {
-    video.endTime = e.target.value;
-    for (var selection of props.selections) {
-      if (selection.name === video.name) {
-        props.setSelections((prev) => [
-          ...prev.filter((selection) => selection.name !== video.name),
-          video,
-        ]);
-        break;
+    e.target.id = "changingTime";
+    if (e.target.value.length === 5) {
+      const splitedTime = e.target.value.split(":");
+      if (
+        !isNaN(parseInt(splitedTime[0])) &&
+        parseInt(splitedTime[1]) < 60 &&
+        e.target.value[2] === ":"
+      ) {
+        e.target.id = "";
+        video.endTime = e.target.value;
+        for (var selection of props.selections) {
+          if (selection.name === video.name) {
+            props.setSelections((prev) => [
+              ...prev.filter((selection) => selection.name !== video.name),
+              video,
+            ]);
+            break;
+          }
+        }
+      } else {
+        alert(`Invalid end time format (MM:SS) for ${video.name}`);
+        e.target.value = video.endTime;
+        e.target.id = "";
       }
     }
   };

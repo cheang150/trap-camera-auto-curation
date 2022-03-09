@@ -19,31 +19,35 @@ function Upload(props) {
     e.preventDefault();
     e.stopPropagation();
     if (e.target.files[0] !== undefined) {
-      const type = String(e.target.files[0].type).split("/")[1];
-      if (!filterList.includes(type)) {
-        setFilterList((prev) => [...prev, type]);
-      }
-      setLoading((prev) => !prev);
-      const videoDatas = {
-        object: e.target.files[0],
-        name: e.target.files[0].name,
-        size: e.target.files[0].size,
-        type: e.target.files[0].type,
-      };
-      var reader = new FileReader();
-      reader.onload = function () {
-        var vid = new Audio(reader.result);
-        vid.onloadedmetadata = function () {
-          const convertedEndTime =
-            ("0" + (Math.floor(parseInt(vid.duration) / 60) % 60)).slice(-2) +
-            ":" +
-            ("0" + (parseInt(vid.duration) % 60)).slice(-2);
-          videoDatas.endTime = convertedEndTime;
-          setVideos((prev) => [...prev, videoDatas]);
-          setLoading((prev) => !prev);
+      const type = String(e.target.files[0].type).split("/")[1].toLowerCase();
+      if (type === "avi" || type === "mov" || type === "mp4") {
+        if (!filterList.includes(type)) {
+          setFilterList((prev) => [...prev, type]);
+        }
+        setLoading((prev) => !prev);
+        const videoDatas = {
+          object: e.target.files[0],
+          name: e.target.files[0].name,
+          size: e.target.files[0].size,
+          type: e.target.files[0].type,
         };
-      };
-      reader.readAsDataURL(e.target.files[0]);
+        var reader = new FileReader();
+        reader.onload = function () {
+          var vid = new Audio(reader.result);
+          vid.onloadedmetadata = function () {
+            const convertedEndTime =
+              ("0" + (Math.floor(parseInt(vid.duration) / 60) % 60)).slice(-2) +
+              ":" +
+              ("0" + (parseInt(vid.duration) % 60)).slice(-2);
+            videoDatas.endTime = convertedEndTime;
+            setVideos((prev) => [...prev, videoDatas]);
+            setLoading((prev) => !prev);
+          };
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      } else {
+        alert("Invalid file type, accepts only avi, mov and mp4.");
+      }
     }
   };
 
