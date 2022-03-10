@@ -68,7 +68,7 @@ function Upload(props) {
           <Search handleSearch={handleSearch} />
           <input
             type="file"
-            accept="video/*"
+            accept=".mp4, .ogg, .webm"
             ref={uploadRef}
             style={{ display: "none" }}
             onChange={handleUpload}
