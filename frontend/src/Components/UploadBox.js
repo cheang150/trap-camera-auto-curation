@@ -6,18 +6,18 @@ function UploadBox(props) {
   const dropRef = useRef(null);
 
   return (
-      <div className="uploadBox" ref={dropRef}>
-          {props.loading ? (
-              <div className="loader">
-                  <BeatLoader color="#40D3ED" size={24} loading={props.loading} />
-              </div>
-          ) : null}
+    <div className="uploadBox" ref={dropRef}>
+      {props.loading ? (
+        <div className="loader">
+          <BeatLoader color="#40D3ED" size={24} loading={props.loading} />
+        </div>
+      ) : null}
       <img src={uploadIllustration} alt="upload illustration" />
       <p className="uploadDesc">
         <span onClick={() => props.uploadRef.current.click()}>Browse </span>
         your files here
       </p>
-      <p className="uploadType">Supports AVI, MOV, MP4</p>
+      <p className="uploadType">Supports MP4, OGG, WebM</p>
     </div>
   );
 }

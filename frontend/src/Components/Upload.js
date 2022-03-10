@@ -20,7 +20,7 @@ function Upload(props) {
     e.stopPropagation();
     if (e.target.files[0] !== undefined) {
       const type = String(e.target.files[0].type).split("/")[1].toLowerCase();
-      if (type === "avi" || type === "mov" || type === "mp4") {
+      if (type === "mp4" || type === "ogg" || type === "webm") {
         if (!filterList.includes(type)) {
           setFilterList((prev) => [...prev, type]);
         }
@@ -46,7 +46,7 @@ function Upload(props) {
         };
         reader.readAsDataURL(e.target.files[0]);
       } else {
-        alert("Invalid file type, accepts only avi, mov and mp4.");
+        alert("Invalid file type, accepts only mp4, ogg and webm.");
       }
     }
   };
