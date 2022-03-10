@@ -292,7 +292,7 @@ def load_and_run_detector(model_file, image_file_names, output_dir,
     List = []
     """Load and run detector on target images, and visualize the results."""
     if len(image_file_names) == 0:
-        print('Warning: no files available')
+        # print('Warning: no files available')
         return
 
     start_time = time.time()
@@ -479,7 +479,7 @@ def main():
     else:
         image_file_names = ImagePathUtils.find_images(args.image_dir, args.recursive)
 
-    print('Running detector on {} images...'.format(len(image_file_names)))
+    # print('Running detector on {} images...'.format(len(image_file_names)))
 
     if args.output_dir:
         os.makedirs(args.output_dir, exist_ok=True)

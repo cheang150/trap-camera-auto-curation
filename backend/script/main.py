@@ -99,7 +99,7 @@ elif superResponse == 2:
 elif superResponse == 3:
     superCounter = 3
 else:
-    print("[-] Invalid input for super resolution model" + '\n')
+    # print("[-] Invalid input for super resolution model" + '\n')
     exit()
 
 # Histogram Equalizer response
@@ -109,7 +109,7 @@ if histResponse == 1:
 elif histResponse == 0:
     histCounter = 0
 else:
-    print("[-] Invalid input for histogram equalizer" + '\n')
+    # print("[-] Invalid input for histogram equalizer" + '\n')
     exit()
 
 # Auto Enhancement response
@@ -119,7 +119,7 @@ if autoResponse == 1:
 elif autoResponse == 0:
     autoCounter = 0
 else:
-    print("[-] Invalid input for auto enhancement" + '\n')
+    # print("[-] Invalid input for auto enhancement" + '\n')
     exit()
 
 # ================
