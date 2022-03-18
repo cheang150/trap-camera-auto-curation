@@ -20,7 +20,7 @@ function Upload(props) {
     e.stopPropagation();
     if (e.target.files[0] !== undefined) {
       const type = String(e.target.files[0].type).split("/")[1].toLowerCase();
-      if (type === "mp4" || type === "ogg" || type === "webm") {
+      if (type === "mp4" || type === "webm") {
         if (!filterList.includes(type)) {
           setFilterList((prev) => [...prev, type]);
         }
@@ -68,7 +68,7 @@ function Upload(props) {
           <Search handleSearch={handleSearch} />
           <input
             type="file"
-            accept=".mp4, .ogg, .webm"
+            accept=".mp4, .webm"
             ref={uploadRef}
             style={{ display: "none" }}
             onChange={handleUpload}

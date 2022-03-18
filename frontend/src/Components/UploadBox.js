@@ -17,7 +17,7 @@ function UploadBox(props) {
         <span onClick={() => props.uploadRef.current.click()}>Browse </span>
         your files here
       </p>
-      <p className="uploadType">Supports MP4, OGG, WebM</p>
+      <p className="uploadType">Supports MP4 and WebM</p>
     </div>
   );
 }

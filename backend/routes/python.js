@@ -16,9 +16,9 @@ router.get("/", function (req, res, next) {
 
 router.post("/", function (req, res, next) {
   var videoData = req.body;
-    const videoFile = req.files.object;
-    console.log(videoData)
-    console.log(videoFile)
+  const videoFile = req.files.object;
+  console.log(videoData);
+  console.log(videoFile);
   videoFile.mv(`${__dirname}/../public/${videoFile.name}`, function (err) {
     if (err) {
       return res.status(500).send(err);
