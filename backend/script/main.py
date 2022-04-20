@@ -1,10 +1,9 @@
+import datetime
 import sys
 
 import cv2
 import os.path
 import shutil
-import datetime
-import random
 import numpy as np
 from moviepy.editor import VideoFileClip
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
@@ -14,7 +13,7 @@ import Background.Enhancement as Enhancement
 
 from Mega.detection.run_tf_detector import load_and_run_detector,ImagePathUtils
 
-DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.78
+DEFAULT_RENDERING_CONFIDENCE_THRESHOLD = 0.19
 MEGA_MODEL_FILE_PATH = r"script/Mega/detection/md_v4.1.0.pb"
 countOriginal = 1
 countSharpen = 1
@@ -168,27 +167,13 @@ while cap.isOpened():
         # print("[+] Background Subtraction Process finished!" + '\n')
         # Call mega detector function here
 
-        initial_amount = len(keyframes_lists)
         image_file_names = ImagePathUtils.find_images(path,"store_true")
         load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
 
         mega_keyframes_lists = os.listdir(output)
-        keyframes_lists = os.listdir(path)
 
-        #print("Images Received: " + str(initial_amount) + '\n')
-        #print("Images Selected: " + str(initial_amount - len(keyframes_lists)) + '\n')
         print("Images Created: " + str(len(mega_keyframes_lists)) + '\n')
         print("Mega results path: " + output + '\n')
-        #print("[+] Mega Process finished!" + '\n')
-
-        # Call mega detector function here
-
-        # initial_amount = len(keyframes_lists)
-        # image_file_names = ImagePathUtils.find_images(path,"store_true")
-        # load_and_run_detector(MEGA_MODEL_FILE_PATH,image_file_names,output,DEFAULT_RENDERING_CONFIDENCE_THRESHOLD,True)
-        #
-        # mega_keyframes_lists = os.listdir(output)
-        #
 
     # Skip frames function
     cf = cap.get(cv2.CAP_PROP_POS_FRAMES) - 1
